@@ -1,0 +1,1015 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#01080e" />
+    <title>OCEAN ODYSSEY - Bách Khoa Thủy Quái &amp; OMEGA NYX-0</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      }
+
+      html,
+      body {
+        min-height: 100dvh;
+        background: radial-gradient(
+          circle at top center,
+          #04233b 0%,
+          #010b14 55%,
+          #010509 100%
+        );
+        color: #f1faee;
+        overflow-x: hidden;
+        overflow-y: auto;
+      }
+
+      .ency-shell {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 20px 16px 48px;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+
+      .ency-topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 12px;
+        background: rgba(4, 22, 36, 0.88);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(100, 223, 223, 0.35);
+        border-radius: 18px;
+        padding: 14px 18px;
+        box-shadow: 0 10px 32px rgba(0, 0, 0, 0.55);
+      }
+
+      .ency-title h1 {
+        font-size: clamp(20px, 3.6vw, 28px);
+        font-weight: 900;
+        letter-spacing: 1px;
+        background: linear-gradient(90deg, #00f5d4, #00bbf9, #fee440);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .ency-title p {
+        font-size: 12.5px;
+        color: #90e0ef;
+        margin-top: 3px;
+      }
+
+      .ency-nav-btns {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .btn-nav {
+        padding: 9px 16px;
+        border-radius: 12px;
+        border: 1.5px solid rgba(0, 245, 212, 0.5);
+        background: rgba(0, 245, 212, 0.14);
+        color: #00f5d4;
+        font-size: 12.5px;
+        font-weight: 800;
+        text-decoration: none;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .btn-nav:hover {
+        background: rgba(0, 245, 212, 0.28);
+        box-shadow: 0 0 16px rgba(0, 245, 212, 0.35);
+      }
+
+      .btn-nav.primary {
+        border: none;
+        background: linear-gradient(90deg, #00f5d4, #00bbf9);
+        color: #011627;
+        font-weight: 900;
+      }
+
+      .controls-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .tabs-row {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .tab-btn {
+        padding: 10px 16px;
+        border-radius: 12px;
+        border: 1.5px solid rgba(100, 223, 223, 0.25);
+        background: rgba(4, 22, 36, 0.8);
+        color: #a8dadc;
+        font-size: 13px;
+        font-weight: 800;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .tab-btn:hover {
+        border-color: #00f5d4;
+        color: #ffffff;
+      }
+
+      .tab-btn.active {
+        background: linear-gradient(90deg, #00f5d4, #00bbf9);
+        color: #011627;
+        border-color: transparent;
+        box-shadow: 0 4px 18px rgba(0, 245, 212, 0.35);
+      }
+
+      .tab-btn.omega-tab.active {
+        background: linear-gradient(90deg, #ff006e, #fee440);
+        color: #090d15;
+        box-shadow: 0 4px 18px rgba(255, 0, 110, 0.45);
+      }
+
+      .search-input {
+        width: 280px;
+        max-width: 100%;
+        padding: 10px 14px;
+        border-radius: 12px;
+        border: 1.5px solid rgba(0, 245, 212, 0.4);
+        background: rgba(2, 12, 22, 0.88);
+        color: #ffffff;
+        font-size: 13px;
+        outline: none;
+      }
+
+      .search-input:focus {
+        border-color: #fee440;
+      }
+
+      .section-heading {
+        font-size: 16px;
+        font-weight: 900;
+        color: #fee440;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(265px, 1fr));
+        gap: 14px;
+      }
+
+      .cards-grid-2 {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 14px;
+      }
+
+      .ency-card {
+        background: rgba(6, 26, 42, 0.88);
+        border: 1.5px solid rgba(100, 223, 223, 0.28);
+        border-radius: 16px;
+        padding: 15px 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+        transition:
+          transform 0.15s,
+          border-color 0.2s;
+      }
+
+      .ency-card:hover {
+        transform: translateY(-3px);
+        border-color: #00f5d4;
+      }
+
+      .ency-card.emp-card {
+        border-color: rgba(255, 84, 0, 0.6);
+        background: linear-gradient(
+          155deg,
+          rgba(54, 16, 12, 0.88),
+          rgba(12, 8, 12, 0.94)
+        );
+      }
+
+      .ency-card.ele-card {
+        border-color: rgba(0, 245, 212, 0.6);
+        background: linear-gradient(
+          155deg,
+          rgba(8, 46, 62, 0.88),
+          rgba(4, 16, 28, 0.94)
+        );
+      }
+
+      .ency-card.boss-card {
+        border-color: rgba(199, 125, 255, 0.65);
+        background: linear-gradient(
+          155deg,
+          rgba(46, 10, 78, 0.88),
+          rgba(10, 6, 24, 0.95)
+        );
+      }
+
+      .ency-card.rainbow-card {
+        border: 2px solid #fee440;
+        background: linear-gradient(
+          135deg,
+          rgba(65, 10, 56, 0.9),
+          rgba(12, 24, 52, 0.94)
+        );
+        box-shadow: 0 0 24px rgba(254, 228, 64, 0.28);
+      }
+
+      .omega-hero {
+        border: 2px solid #ff006e;
+        border-radius: 20px;
+        padding: 20px 22px;
+        background: linear-gradient(
+          135deg,
+          rgba(62, 4, 34, 0.92),
+          rgba(18, 4, 38, 0.96)
+        );
+        box-shadow:
+          0 0 38px rgba(255, 0, 110, 0.32),
+          inset 0 0 28px rgba(254, 228, 64, 0.08);
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .omega-hero-top {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+
+      .omega-avatar {
+        width: 84px;
+        height: 84px;
+        border-radius: 20px;
+        background: radial-gradient(circle, #ff006e44, #090d15);
+        border: 2px solid #fee440;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 46px;
+        box-shadow: 0 0 22px rgba(255, 0, 110, 0.5);
+      }
+
+      .pill-tag {
+        display: inline-block;
+        padding: 3px 9px;
+        border-radius: 999px;
+        font-size: 10.5px;
+        font-weight: 900;
+        background: rgba(255, 255, 255, 0.1);
+        color: #fee440;
+      }
+
+      .pill-tag.omega {
+        background: linear-gradient(90deg, #ff006e, #fee440);
+        color: #090d15;
+      }
+
+      .stat-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 6px;
+        background: rgba(0, 0, 0, 0.35);
+        border-radius: 10px;
+        padding: 8px 10px;
+        font-size: 12px;
+        color: #caf0f8;
+      }
+
+      .swatch-bar {
+        height: 8px;
+        border-radius: 999px;
+        width: 100%;
+      }
+
+      .hidden {
+        display: none !important;
+      }
+
+      .empty-state {
+        text-align: center;
+        padding: 36px 16px;
+        color: #90e0ef;
+        font-size: 14px;
+        background: rgba(4, 22, 36, 0.65);
+        border-radius: 16px;
+        border: 1px dashed rgba(100, 223, 223, 0.35);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="ency-shell">
+      <header class="ency-topbar">
+        <div class="ency-title">
+          <h1>📖 BÁCH KHOA THỦY QUÁI &amp; OMEGA</h1>
+          <p>
+            Tra cứu 8 Chuẩn Tiến Hóa • Công Thức Lõi Siêu Cấp • Nhân Vật OMEGA
+            NYX-0 • Raid Boss
+          </p>
+        </div>
+        <div class="ency-nav-btns">
+          <a href="./index.html" class="btn-nav">🏠 Về Sảnh Chính</a>
+          <a href="./game.html" class="btn-nav primary">⚔️ Vào Đấu Trường</a>
+        </div>
+      </header>
+
+      <div class="controls-bar">
+        <div class="tabs-row" id="ency-tabs">
+          <button type="button" class="tab-btn active" data-tab="evolution">
+            🧬 8 Chuẩn Tiến Hóa
+          </button>
+          <button type="button" class="tab-btn" data-tab="augments">
+            🌟 Lõi Siêu Cấp &amp; Công Thức
+          </button>
+          <button type="button" class="tab-btn omega-tab" data-tab="omega">
+            🕳️ OMEGA NYX-0 &amp; Sinh Vật
+          </button>
+          <button type="button" class="tab-btn" data-tab="bosses">
+            🐉 Raid Boss &amp; Lõi Boss
+          </button>
+        </div>
+
+        <input
+          type="text"
+          id="ency-search"
+          class="search-input"
+          placeholder="🔍 Tìm kiếm (VD: Dạng 8, NYX-0, Băng, Leviathan)..."
+        />
+      </div>
+
+      <main id="ency-content"></main>
+    </div>
+
+    <script>
+      const EVOLUTION_FORMS = [
+        {
+          stage: 1,
+          minLevel: 1,
+          title: "Dạng 1: Nguyên Thủy",
+          scaleBonus: 1.0,
+          turnRateMult: 1.24,
+          massHpMult: 1.0,
+          massDmgMult: 1.0,
+          backstabCritBonus: 0.45,
+          gradient: "linear-gradient(90deg, #00bbf9, #023e8a)",
+          note: "Linh hoạt tối đa, tỷ lệ chí mạng cắn đuôi rất cao (+45%).",
+        },
+        {
+          stage: 2,
+          minLevel: 8,
+          title: "Dạng 2: Lam Ngọc Thanh Khiết",
+          scaleBonus: 1.15,
+          turnRateMult: 1.16,
+          massHpMult: 1.04,
+          massDmgMult: 1.03,
+          backstabCritBonus: 0.38,
+          gradient: "linear-gradient(90deg, #00f5d4, #0077b6)",
+          note: "Mở khóa Lõi Siêu Cấp #1 và Nội Tại Tiến Hóa Dạng 2.",
+        },
+        {
+          stage: 3,
+          minLevel: 18,
+          title: "Dạng 3: Huyết Long Lửa Đỏ",
+          scaleBonus: 1.32,
+          turnRateMult: 1.08,
+          massHpMult: 1.08,
+          massDmgMult: 1.06,
+          backstabCritBonus: 0.32,
+          gradient: "linear-gradient(90deg, #ff4d6d, #ffbe0b)",
+          note: "Đủ điều kiện đánh thức Thủy Quái Leviathan (Lv.18+).",
+        },
+        {
+          stage: 4,
+          minLevel: 30,
+          title: "Dạng 4: Thủy Thần Neon",
+          scaleBonus: 1.5,
+          turnRateMult: 1.0,
+          massHpMult: 1.12,
+          massDmgMult: 1.1,
+          backstabCritBonus: 0.26,
+          gradient: "linear-gradient(90deg, #f72585, #4cc9f0)",
+          note: "Mở khóa Lõi Siêu Cấp #2 và Nội Tại Tiến Hóa Dạng 4.",
+        },
+        {
+          stage: 5,
+          minLevel: 45,
+          title: "Dạng 5: Hải Vương Hoàng Kim",
+          scaleBonus: 1.7,
+          turnRateMult: 0.92,
+          massHpMult: 1.18,
+          massDmgMult: 1.15,
+          backstabCritBonus: 0.2,
+          gradient: "linear-gradient(90deg, #9d4edd, #ffd166)",
+          note: "Xuất hiện sừng uy nghiêm, râu phát quang và 6 tinh cầu hộ thể.",
+        },
+        {
+          stage: 6,
+          minLevel: 62,
+          title: "Dạng 6: Cổ Thần Lôi Điện",
+          scaleBonus: 1.92,
+          turnRateMult: 0.8,
+          massHpMult: 1.28,
+          massDmgMult: 1.22,
+          backstabCritBonus: 0.14,
+          gradient: "linear-gradient(90deg, #00bbf9, #ff006e)",
+          note: "Mở khóa Lõi Siêu Cấp #3, Nội Tại Dạng 6 & tia điện cao áp.",
+        },
+        {
+          stage: 7,
+          minLevel: 80,
+          title: "Dạng 7: Hỗn Độn Thủy Tổ",
+          scaleBonus: 2.15,
+          turnRateMult: 0.7,
+          massHpMult: 1.4,
+          massDmgMult: 1.32,
+          backstabCritBonus: 0.1,
+          gradient: "linear-gradient(90deg, #ff5400, #fee440)",
+          note: "Đeo vương miện cổ đại, mắt rực lửa & dải lụa năng lượng sau đuôi.",
+        },
+        {
+          stage: 8,
+          minLevel: 95,
+          title: "Dạng 8: TỐI THƯỢNG CẦU VỒNG",
+          scaleBonus: 2.4,
+          turnRateMult: 0.62,
+          massHpMult: 1.55,
+          massDmgMult: 1.45,
+          backstabCritBonus: 0.08,
+          rainbow: true,
+          gradient:
+            "linear-gradient(90deg, #ff006e, #ffbe0b, #06d6a0, #00bbf9, #8338ec)",
+          note: "Mở khóa Lõi Siêu Cấp #4, Nội Tại tối thượng Dạng 8 & hào quang 12 tinh cầu cầu vồng.",
+        },
+      ];
+
+      const SUPER_AUGMENTS = [
+        {
+          name: "Trái Tim Khổng Lồ",
+          icon: "🫀",
+          system: "empowerment",
+          systemName: "Hệ Cường Hóa",
+          formula: "MaxHP × 1.25 | Hồi 40% HP | Scale × 1.15",
+          desc: "+25% Máu tối đa và phóng đại kích cỡ cơ thể thêm +15%.",
+        },
+        {
+          name: "Nanh Vuốt Hủy Diệt",
+          icon: "🗡️",
+          system: "empowerment",
+          systemName: "Hệ Cường Hóa",
+          formula: "BitePower + 0.22 | TrueDMG = TargetMaxHP × 8%",
+          desc: "+22% Sức mạnh cắn và gây thêm sát thương chuẩn theo % máu địch.",
+        },
+        {
+          name: "Giáp Gai Phản Chấn",
+          icon: "🛡️",
+          system: "empowerment",
+          systemName: "Hệ Cường Hóa",
+          formula: "DamageReduction + 20% (Cap 65%) | Reflect 35%",
+          desc: "Giảm 20% sát thương nhận vào và phản lại 35% sát thương lên kẻ tấn công.",
+        },
+        {
+          name: "Cuồng Huyết Hút Hồn",
+          icon: "🧛",
+          system: "empowerment",
+          systemName: "Hệ Cường Hóa",
+          formula: "LifeSteal + 8 | OnKill/Backstab Heal = +15% MaxHP",
+          desc: "Hồi ngay 15% Máu tối đa mỗi khi hạ gục kẻ địch hoặc cắn trúng đuôi.",
+        },
+        {
+          name: "Động Cơ Phản Lực",
+          icon: "🚀",
+          system: "empowerment",
+          systemName: "Hệ Cường Hóa",
+          formula: "SpeedBonus + 28% | Free Boost Stamina <= 2.0s",
+          desc: "+28% Tốc độ bơi và miễn phí thể lực trong 2 giây đầu khi tăng tốc.",
+        },
+        {
+          name: "Lôi Đình Đại Dương",
+          icon: "⚡",
+          system: "elemental",
+          systemName: "Hệ Nguyên Tố",
+          formula:
+            "Pulse = 2.8s | Range = 380px | MaxTargets = 25 | Stun = 0.6s",
+          desc: "Nhịp xung 2.8s giật sét lan tối đa 25 kẻ địch gần nhất & làm choáng 0.6s.",
+        },
+        {
+          name: "Hàn Băng Vực Thẳm",
+          icon: "❄️",
+          system: "elemental",
+          systemName: "Hệ Nguyên Tố",
+          formula:
+            "Pulse = 2.8s | Active = 0.6s | Range = R + 200px | MaxTargets = 25",
+          desc: "Nhịp xung 2.8s tỏa sóng băng giá làm chậm tối đa 25 kẻ địch xung quanh.",
+        },
+        {
+          name: "Hỏa Ngục Dung Nham",
+          icon: "🌋",
+          system: "elemental",
+          systemName: "Hệ Nguyên Tố",
+          formula: "Trail Pool = 2.5s | Tick = 0.45s | MaxPools = 24",
+          desc: "Khi bơi nhanh để lại vệt dung nham dưới đáy biển thiêu đốt kẻ truy đuổi.",
+        },
+        {
+          name: "Thủy Triều Hấp Tinh",
+          icon: "🌀",
+          system: "elemental",
+          systemName: "Hệ Nguyên Tố",
+          formula: "Magnet + 260px | Pulse = 2.8s (0.6s hút) | Pearl XP × 2",
+          desc: "Nhịp xung 2.8s hút tối đa 25 ngọc trai & thịt rơi gần nhất, đồng thời nhân đôi điểm ngọc.",
+        },
+        {
+          name: "Cộng Hưởng Sóng Âm",
+          icon: "🔮",
+          system: "elemental",
+          systemName: "Hệ Nguyên Tố",
+          formula: "Cooldown × 0.75 (Min 0.30) | EchoDelay = 0.22s (R × 1.15)",
+          desc: "Giảm 25% hồi chiêu [E] và mỗi lần dùng [E] phóng thêm 1 sóng xung kích thứ hai.",
+        },
+      ];
+
+      const SYNERGY_FORMULAS = [
+        {
+          system: "empowerment",
+          title: "⚔️ Cộng Hưởng Hệ Cường Hóa (2 / 3 / 4 Lõi)",
+          tiers: [
+            "Mốc (2): +15% Sát thương cắn & +10% Giảm sát thương nhận vào.",
+            "Mốc (3): Nhịp xung 2.8s đẩy văng tối đa 25 kẻ địch xung quanh.",
+            "Mốc (4 - Chiến Thần Bất Diệt): Miễn nhiễm mọi khống chế (TIME_STOP / STUN / BLACK_HOLE_PULL) & +20% kích cỡ.",
+          ],
+        },
+        {
+          system: "elemental",
+          title: "🔮 Cộng Hưởng Hệ Nguyên Tố (2 / 3 / 4 Lõi)",
+          tiers: [
+            "Mốc (2): +25% tốc độ tích Nộ & giảm 15% hồi chiêu kỹ năng.",
+            "Mốc (3): Dùng kỹ năng [E] kích hoạt Sóng Cộng Hưởng diện rộng.",
+            "Mốc (4 - Pháp Sư Hải Thần): Khi bật Hóa Thần [R], liên tục bắn cầu nguyên tố truy đuổi mỗi 0.6s.",
+          ],
+        },
+      ];
+
+      const OMEGA_NYX0 = {
+        name: "NYX-0: Hư Không Thủy Tổ",
+        tier: "NHÂN VẬT CẤP OMEGA",
+        icon: "🕳️",
+        stats: [
+          "HP Gốc: 160 • Thể Lực: 160",
+          "Tốc Độ: 4.55 • Bơi Nhanh: x1.88",
+          "Hệ Số Điểm: x1.35",
+          "Nội Tại: Trường Phản Vật Chất (280px)",
+        ],
+        skills: [
+          {
+            key: "NỘI TẠI",
+            name: "Trường Phản Vật Chất (280px)",
+            desc: "Giảm 50% hiệu lực kỹ năng Không Gian / Thời Gian lên bản thân và chuyển hóa 50% lượng hồi máu của kẻ địch trong phạm vi thành sát thương ngược.",
+          },
+          {
+            key: "[E / 1]",
+            name: "Xúc Tu Hư Vô (Cooldown: 6.0s)",
+            desc: "Quét 4 xúc tu đen hình chữ X phía trước mặt, gây sát thương lớn và khóa ngẫu nhiên 1 ô kỹ năng của kẻ địch trong 3 giây.",
+          },
+          {
+            key: "[Q / 2]",
+            name: "Đảo Ngược Không Gian (Cooldown: 10.5s)",
+            desc: "Phát sóng xung kích đảo ngược phím di chuyển & Joystick của mọi kẻ địch trúng đòn trong 5 giây.",
+          },
+          {
+            key: "[R / 3]",
+            name: "Vụ Nổ Triệt Tiêu (Cooldown: 16.0s)",
+            desc: "Vận sức 1.5s tạo hố đen hút mục tiêu trong 450px, sau đó kích nổ sát thương cực đại và thanh tẩy hiệu ứng bất lợi.",
+          },
+        ],
+      };
+
+      const BASE_SPECIES = [
+        {
+          name: "Cá Kiếm Hoàng Kim",
+          icon: "🗡️",
+          rarity: "Cơ Bản",
+          counter: "Khắc chế Thợ Lặn (+18% DMG)",
+          skill: "[E] Xung Kích: Lướt nhanh & làm choáng 2.5s.",
+          passives:
+            "Dạng 2: Mũi Kiếm Xuyên Giáp | Dạng 4: Săn Mồi Cô Độc | Dạng 6: Kiếm Ảnh | Dạng 8: Kết Liễu <25% HP.",
+        },
+        {
+          name: "Rùa Thần Biển Sâu",
+          icon: "🐢",
+          rarity: "Cơ Bản",
+          counter: "Khắc chế Cá Sấu (+18% DMG)",
+          skill: "[E] Pháo Đài: Bất tử 3.5s & đẩy văng kẻ địch.",
+          passives:
+            "Dạng 2: Khiên Hấp Thụ | Dạng 4: Hồi 4% HP/s | Dạng 6: Địa Chấn | Dạng 8: Bất Tử Huyền Vũ <18% HP.",
+        },
+        {
+          name: "Cá Sấu Chúa Đầm Lầy",
+          icon: "🐊",
+          rarity: "Cơ Bản",
+          counter: "Khắc chế Cá Kiếm (+18% DMG)",
+          skill: "[E] Xoáy Nước: Kéo con mồi lại gần.",
+          passives:
+            "Dạng 2: Phục Kích x1.8 | Dạng 4: Khóa Đuôi | Dạng 6: Cuồng Nộ <50% HP | Dạng 8: Hàm Vực Sâu.",
+        },
+        {
+          name: "Thợ Lặn Công Nghệ",
+          icon: "🤿",
+          rarity: "Cơ Bản",
+          counter: "Khắc chế Rùa Thần (+18% DMG)",
+          skill: "[E] Xung EMP: Làm choáng diện rộng 3.5s.",
+          passives:
+            "Dạng 2: Radar Hút Ngọc | Dạng 4: Drone Laser | Dạng 6: Giáp Nano | Dạng 8: Pháo Vệ Tinh Orbital.",
+        },
+        {
+          name: "Cá Không Gian",
+          icon: "🌌",
+          rarity: "Sử Thi (Trùng Sinh Cá Kiếm Lv.50)",
+          counter: "Ưu thế +15% DMG toàn hệ",
+          skill:
+            "[E] Lãnh Địa & Bước Nhảy | [Q] Lát Cắt | [R] Bán Lãnh Địa & Hạ Cấp.",
+          passives:
+            "Dạng 2: Rạn Nứt (+35% Tốc) | Dạng 4: Giảm DMG trong Lãnh Địa | Dạng 6: Cộng Hưởng Nhảy | Dạng 8: Giảm 25% CD.",
+        },
+        {
+          name: "Cá Thời Gian",
+          icon: "⏳",
+          rarity: "Sử Thi (Trùng Sinh Cá Kiếm Lv.75)",
+          counter: "Ưu thế +15% DMG toàn hệ",
+          skill:
+            "[E] Song Bản Thể 0.5x/2.0x | [Q] Lồng Ngưng Đọng | [R] Trường Thời Gian & Tua Ngược 3s.",
+          passives:
+            "Dạng 2: Đánh Cắp 1s CD | Dạng 4: Tăng Thời Gian Bản Thể | Dạng 6: +30% Nổ Nghịch Lý | Dạng 8: -50% CD.",
+        },
+      ];
+
+      const RAID_BOSSES = [
+        {
+          name: "Leviathan Chúa Tể",
+          badge: "RAID BOSS CỔ ĐIỂN",
+          hp: "1.200 HP",
+          spawn:
+            "Thức tỉnh khi có người chơi đạt Tiến Hóa Dạng 3+ (hoặc Admin triệu hồi).",
+          mechanics:
+            "Tăng tốc húc liên hoàn, điểm yếu là vùng Đuôi (cắn đuôi gây chí mạng & rơi thịt 120 XP).",
+          rewards:
+            "+2.500 XP & +150 💎 (Yêu cầu đóng góp ≥ 15% tổng sát thương).",
+        },
+        {
+          name: "Boss Sử Thi Không Gian [Lv.50]",
+          badge: "RAID BOSS SỬ THI",
+          hp: "3.600 HP",
+          spawn: "Xuất hiện mỗi 15 phút tại bản đồ ngẫu nhiên.",
+          mechanics:
+            "Triển khai Lãnh Địa Không Gian R=460, Dịch chuyển áp sát, phóng Lát Cắt & Quả Cầu Bán Lãnh Địa gây BLACK_HOLE_PULL + STUN.",
+          rewards:
+            "+8.000 XP, +200 💎, Rơi 2 vật phẩm & 1.5% rớt Lõi Skill Boss Không Gian (Z / X / C) hoặc Thức Tỉnh V2.",
+        },
+        {
+          name: "Boss Sử Thi Thời Gian [Lv.75]",
+          badge: "RAID BOSS HIẾM (2%/GIỜ)",
+          hp: "5.000 HP",
+          spawn: "Tỷ lệ xuất hiện hiếm 2% mỗi giờ (hoặc Admin triệu hồi).",
+          mechanics:
+            "Triệu hồi Bản Thể Quá Khứ & Tương Lai, phóng Cầu Ngưng Đọng (TIME_STOP 2.4s), mở Trường Thời Gian R=480 & tự Tua Ngược hồi máu khi HP < 28%.",
+          rewards:
+            "+14.000 XP, +350 💎, Rơi 2 vật phẩm & 1.5% rớt Lõi Skill Boss Thời Gian (V / B / F) hoặc Thức Tỉnh V2.",
+        },
+      ];
+
+      const BOSS_CORES = [
+        {
+          key: "Z",
+          name: "Lõi Bành Trướng Lãnh Địa (KG)",
+          v2: "Bành Trướng Tinh Vân V2 (CD × 0.8 • Power × 1.45)",
+        },
+        {
+          key: "X",
+          name: "Lõi Lát Cắt Không Gian (KG)",
+          v2: "Tam Trảm Hư Không V2 (3 lưỡi liềm hình quạt)",
+        },
+        {
+          key: "C",
+          name: "Lõi Hạ Cấp & Bóp Méo (KG)",
+          v2: "Hố Đen Phá Hủy V2 (Nổ xung kích kép)",
+        },
+        {
+          key: "V",
+          name: "Lõi Dòng Chảy Đa Chiều (TG)",
+          v2: "Vòng Lặp Vĩnh Hằng V2 (Bản thể Bạch Kim)",
+        },
+        {
+          key: "B",
+          name: "Lõi Lồng Giam Ngưng Đọng (TG)",
+          v2: "Ngục Tù Chronos V2 (Bùng nổ Nghịch Lý mở rộng)",
+        },
+        {
+          key: "F",
+          name: "Lõi Trường Thời Gian (TG)",
+          v2: "Đế Chế Vĩnh Cửu V2 (+12% hồi HP khi Tua Ngược)",
+        },
+      ];
+
+      let activeTab = "evolution";
+      let searchQuery = "";
+
+      function matchesQuery(text) {
+        if (!searchQuery) return true;
+        return String(text).toLowerCase().includes(searchQuery);
+      }
+
+      function renderEvolutionTab() {
+        const filtered = EVOLUTION_FORMS.filter((f) =>
+          matchesQuery(`${f.title} Dạng ${f.stage} Lv.${f.minLevel} ${f.note}`),
+        );
+        if (!filtered.length) {
+          return `<div class="empty-state">Không tìm thấy Chuẩn Tiến Hóa phù hợp với "${searchQuery}".</div>`;
+        }
+        return `
+          <div class="section-heading">🧬 8 Chuẩn Tiến Hóa (Level 1 → Level 100)</div>
+          <div class="cards-grid">
+            ${filtered
+              .map(
+                (f) => `
+              <div class="ency-card ${f.rainbow ? "rainbow-card" : ""}">
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                  <span class="pill-tag">DẠNG ${f.stage}</span>
+                  <span style="font-size:12px;font-weight:900;color:#00f5d4;">Mở ở Lv.${f.minLevel}+</span>
+                </div>
+                <div style="font-size:16px;font-weight:900;color:#ffffff;">${f.title}</div>
+                <div class="swatch-bar" style="background:${f.gradient};"></div>
+                <div class="stat-grid">
+                  <div>📏 Kích cỡ: <b>${f.scaleBonus.toFixed(2)}x</b></div>
+                  <div>🔄 Xoay hướng: <b>${f.turnRateMult.toFixed(2)}x</b></div>
+                  <div>❤️ Hệ số HP: <b>${f.massHpMult.toFixed(2)}x</b></div>
+                  <div>⚔️ Hệ số DMG: <b>${f.massDmgMult.toFixed(2)}x</b></div>
+                </div>
+                <div style="font-size:12px;color:#fee440;font-weight:700;">
+                  🦷 Thưởng Chí Mạng Cắn Đuôi: +${Math.round(f.backstabCritBonus * 100)}%
+                </div>
+                <div style="font-size:12px;color:#caf0f8;line-height:1.45;">${f.note}</div>
+              </div>
+            `,
+              )
+              .join("")}
+          </div>
+        `;
+      }
+
+      function renderAugmentsTab() {
+        const filteredAugs = SUPER_AUGMENTS.filter((a) =>
+          matchesQuery(`${a.name} ${a.systemName} ${a.formula} ${a.desc}`),
+        );
+        const filteredSyn = SYNERGY_FORMULAS.filter((s) =>
+          matchesQuery(`${s.title} ${s.tiers.join(" ")}`),
+        );
+
+        let html = "";
+        if (filteredSyn.length) {
+          html += `
+            <div class="section-heading">🔗 Công Thức Cộng Hưởng Hệ (Tối Đa 4 Lõi Siêu Cấp)</div>
+            <div class="cards-grid-2" style="margin-bottom:18px;">
+              ${filteredSyn
+                .map(
+                  (s) => `
+                <div class="ency-card ${s.system === "empowerment" ? "emp-card" : "ele-card"}">
+                  <div style="font-size:15px;font-weight:900;color:#fee440;">${s.title}</div>
+                  ${s.tiers
+                    .map(
+                      (t) =>
+                        `<div style="font-size:12.5px;color:#e0fbfc;line-height:1.45;">• ${t}</div>`,
+                    )
+                    .join("")}
+                </div>
+              `,
+                )
+                .join("")}
+            </div>
+          `;
+        }
+
+        if (filteredAugs.length) {
+          html += `
+            <div class="section-heading">🌟 10 Lõi Siêu Cấp &amp; Công Thức Kỹ Thuật</div>
+            <div class="cards-grid">
+              ${filteredAugs
+                .map(
+                  (a) => `
+                <div class="ency-card ${a.system === "empowerment" ? "emp-card" : "ele-card"}">
+                  <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <span style="font-size:28px;">${a.icon}</span>
+                    <span class="pill-tag">${a.systemName}</span>
+                  </div>
+                  <div style="font-size:15.5px;font-weight:900;color:#fee440;">${a.name}</div>
+                  <div style="font-size:11.5px;font-weight:800;color:#00f5d4;background:rgba(0,0,0,0.45);padding:6px 8px;border-radius:8px;font-family:monospace;">
+                    ${a.formula}
+                  </div>
+                  <div style="font-size:12.5px;color:#caf0f8;line-height:1.45;">${a.desc}</div>
+                </div>
+              `,
+                )
+                .join("")}
+            </div>
+          `;
+        }
+
+        return (
+          html ||
+          `<div class="empty-state">Không tìm thấy Lõi Siêu Cấp phù hợp với "${searchQuery}".</div>`
+        );
+      }
+
+      function renderOmegaTab() {
+        const showOmega = matchesQuery(
+          `${OMEGA_NYX0.name} ${OMEGA_NYX0.tier} ${OMEGA_NYX0.stats.join(" ")} ${OMEGA_NYX0.skills.map((s) => `${s.name} ${s.desc}`).join(" ")}`,
+        );
+        const filteredSpecies = BASE_SPECIES.filter((sp) =>
+          matchesQuery(
+            `${sp.name} ${sp.rarity} ${sp.counter} ${sp.skill} ${sp.passives}`,
+          ),
+        );
+
+        let html = "";
+        if (showOmega) {
+          html += `
+            <div class="omega-hero" style="margin-bottom:18px;">
+              <div class="omega-hero-top">
+                <div class="omega-avatar">${OMEGA_NYX0.icon}</div>
+                <div style="flex:1;">
+                  <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px;">
+                    <span style="font-size:22px;font-weight:900;color:#ffffff;">${OMEGA_NYX0.name}</span>
+                    <span class="pill-tag omega">${OMEGA_NYX0.tier}</span>
+                  </div>
+                  <div class="stat-grid" style="margin-top:8px;">
+                    ${OMEGA_NYX0.stats.map((st) => `<div>• <b>${st}</b></div>`).join("")}
+                  </div>
+                </div>
+              </div>
+
+              <div class="cards-grid-2">
+                ${OMEGA_NYX0.skills
+                  .map(
+                    (sk) => `
+                  <div class="ency-card" style="border-color:rgba(255,0,110,0.5);background:rgba(12,6,18,0.86);">
+                    <div style="display:flex;align-items:center;gap:8px;">
+                      <span class="pill-tag omega">${sk.key}</span>
+                      <b style="color:#fee440;font-size:14px;">${sk.name}</b>
+                    </div>
+                    <div style="font-size:12.5px;color:#e0fbfc;line-height:1.48;">${sk.desc}</div>
+                  </div>
+                `,
+                  )
+                  .join("")}
+              </div>
+            </div>
+          `;
+        }
+
+        if (filteredSpecies.length) {
+          html += `
+            <div class="section-heading">🐟 6 Loài Thủy Quái Cơ Bản &amp; Sử Thi</div>
+            <div class="cards-grid-2">
+              ${filteredSpecies
+                .map(
+                  (sp) => `
+                <div class="ency-card">
+                  <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <span style="font-size:16px;font-weight:900;color:#ffffff;">${sp.icon} ${sp.name}</span>
+                    <span class="pill-tag">${sp.rarity}</span>
+                  </div>
+                  <div style="font-size:12px;color:#00f5d4;font-weight:800;">⚔️ ${sp.counter}</div>
+                  <div style="font-size:12.5px;color:#fee440;font-weight:700;">${sp.skill}</div>
+                  <div style="font-size:12px;color:#caf0f8;line-height:1.45;">${sp.passives}</div>
+                </div>
+              `,
+                )
+                .join("")}
+            </div>
+          `;
+        }
+
+        return (
+          html ||
+          `<div class="empty-state">Không tìm thấy sinh vật phù hợp với "${searchQuery}".</div>`
+        );
+      }
+
+      function renderBossesTab() {
+        const filteredBosses = RAID_BOSSES.filter((b) =>
+          matchesQuery(`${b.name} ${b.badge} ${b.mechanics} ${b.rewards}`),
+        );
+        const filteredCores = BOSS_CORES.filter((c) =>
+          matchesQuery(`${c.key} ${c.name} ${c.v2}`),
+        );
+
+        let html = "";
+        if (filteredBosses.length) {
+          html += `
+            <div class="section-heading">🐉 Danh Sách Raid Boss Đại Dương</div>
+            <div class="cards-grid-2" style="margin-bottom:18px;">
+              ${filteredBosses
+                .map(
+                  (b) => `
+                <div class="ency-card boss-card">
+                  <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
+                    <span style="font-size:17px;font-weight:900;color:#ffffff;">${b.name}</span>
+                    <span class="pill-tag">${b.badge}</span>
+                  </div>
+                  <div style="font-size:12.5px;color:#ff758f;font-weight:800;">❤️ Máu tối đa: ${b.hp}</div>
+                  <div style="font-size:12px;color:#fee440;"><b>⏰ Điều kiện xuất hiện:</b> ${b.spawn}</div>
+                  <div style="font-size:12px;color:#e0fbfc;line-height:1.45;"><b>⚔️ Cơ chế:</b> ${b.mechanics}</div>
+                  <div style="font-size:12px;color:#06d6a0;line-height:1.45;"><b>🎁 Phần thưởng:</b> ${b.rewards}</div>
+                </div>
+              `,
+                )
+                .join("")}
+            </div>
+          `;
+        }
+
+        if (filteredCores.length) {
+          html += `
+            <div class="section-heading">💠 6 Lõi Skill Boss Sử Thi &amp; Cơ Chế Thức Tỉnh V2</div>
+            <div class="cards-grid">
+              ${filteredCores
+                .map(
+                  (c) => `
+                <div class="ency-card boss-card">
+                  <div style="display:flex;align-items:center;gap:8px;">
+                    <span class="pill-tag">Phím [${c.key}]</span>
+                    <b style="color:#e0aaff;font-size:14px;">${c.name}</b>
+                  </div>
+                  <div style="font-size:12px;color:#fee440;line-height:1.45;">
+                    <b>🔥 Thức Tỉnh V2:</b> ${c.v2}
+                  </div>
+                </div>
+              `,
+                )
+                .join("")}
+            </div>
+          `;
+        }
+
+        return (
+          html ||
+          `<div class="empty-state">Không tìm thấy thông tin Boss phù hợp với "${searchQuery}".</div>`
+        );
+      }
+
+      function renderEncyclopedia() {
+        const container = document.getElementById("ency-content");
+        if (activeTab === "evolution") {
+          container.innerHTML = renderEvolutionTab();
+        } else if (activeTab === "augments") {
+          container.innerHTML = renderAugmentsTab();
+        } else if (activeTab === "omega") {
+          container.innerHTML = renderOmegaTab();
+        } else {
+          container.innerHTML = renderBossesTab();
+        }
+      }
+
+      document.querySelectorAll("#ency-tabs .tab-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document
+            .querySelectorAll("#ency-tabs .tab-btn")
+            .forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          activeTab = btn.dataset.tab;
+          renderEncyclopedia();
+        });
+      });
+
+      document.getElementById("ency-search").addEventListener("input", (e) => {
+        searchQuery = e.target.value.trim().toLowerCase();
+        renderEncyclopedia();
+      });
+
+      renderEncyclopedia();
+    </script>
+  </body>
+</html>
