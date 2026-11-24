@@ -276,6 +276,16 @@
         box-shadow: 0 0 22px rgba(255, 0, 110, 0.5);
       }
 
+      .omega-synergy-box {
+        background: rgba(16, 4, 28, 0.82);
+        border: 1px dashed rgba(232, 121, 249, 0.55);
+        border-radius: 12px;
+        padding: 12px 14px;
+        font-size: 12.5px;
+        color: #f3e8ff;
+        line-height: 1.55;
+      }
+
       .pill-tag {
         display: inline-block;
         padding: 3px 9px;
@@ -320,6 +330,12 @@
         background: rgba(4, 22, 36, 0.65);
         border-radius: 16px;
         border: 1px dashed rgba(100, 223, 223, 0.35);
+      }
+
+      @media (max-width: 640px) {
+        .stat-grid {
+          grid-template-columns: 1fr;
+        }
       }
     </style>
   </head>
@@ -579,32 +595,50 @@
         tier: "NHÂN VẬT CẤP OMEGA",
         icon: "🕳️",
         stats: [
-          "HP Gốc: 160 • Thể Lực: 160",
+          "HP Gốc: 220 • Thể Lực: 165",
           "Tốc Độ: 4.55 • Bơi Nhanh: x1.88",
-          "Hệ Số Điểm: x1.35",
-          "Nội Tại: Trường Phản Vật Chất (280px)",
+          "Hệ Số Điểm: x1.35 • Tầm Cắn: 1.24x",
+          "Tài Nguyên: Entropy (0–100%) & Dấu Ấn Sụp Đổ (3 Tầng)",
+          "Tiến Hóa: 4 → 12 Xúc Tu Quán Tính (8 Cấp • Scale theo Cấp & Kích Cỡ)",
+          "Mở Khóa: 500 💎 / Mở Không Gian + Thời Gian / Dùng Thử Admin",
+          "Quy Tắc Đặc Biệt: Vô hiệu hóa Túi Vật Phẩm 3 Ô",
         ],
         skills: [
           {
-            key: "NỘI TẠI",
-            name: "Trường Phản Vật Chất (280px)",
-            desc: "Giảm 50% hiệu lực kỹ năng Không Gian / Thời Gian lên bản thân và chuyển hóa 50% lượng hồi máu của kẻ địch trong phạm vi thành sát thương ngược.",
+            key: "NỘI TẠI 1",
+            name: "Trường Phản Vật Chất (280px → 780px) & Dấu Ấn Sụp Đổ",
+            desc: "Bán kính mở rộng theo cấp & kích cỡ. Giảm 50% hiệu lực kỹ năng/khống chế hệ Không Gian & Thời Gian lên bản thân; chuyển hóa 50% lượng hồi máu của địch trong vùng thành sát thương ngược; gây nhiễu loạn +2 Dấu Ấn khi địch Không/Thời Gian lướt qua.\nTích đủ 3 tầng Dấu Ấn Sụp Đổ lên mục tiêu sẽ Kích Nổ gây sát thương chuẩn theo % MaxHP, hồi 8% HP, +15% Entropy & Khóa 1 ô kỹ năng (1.5s).",
           },
           {
-            key: "[E / 1]",
-            name: "Xúc Tu Hư Vô (Cooldown: 6.0s)",
-            desc: "Quét 4 xúc tu đen hình chữ X phía trước mặt, gây sát thương lớn và khóa ngẫu nhiên 1 ô kỹ năng của kẻ địch trong 3 giây.",
+            key: "NỘI TẠI 2",
+            name: "Thích Nghi Hư Không (3 Hình Thái)",
+            desc: "• Giáp Phản Vật Chất (chịu sát thương dồn): Khép chặt giáp xương, dựng khiên lục giác lam giảm 28% sát thương & tăng lá chắn ảo E2.\n• Săn Mồi Tầm Xa (địch ở tầm xa): Kéo dài xúc tu 1.2x, xếp mảnh thiên thạch về trước, +18% tốc độ, +25% tầm chiêu & nhịp 3 đánh thường phóng thêm Mũi Lao Hư Vô.\n• Thống Trị Đám Đông (≥2 địch áp sát): Mắt phụ phát xung đỏ thẫm, đánh thường quất tối đa 3 mục tiêu cùng lúc & nhịp 3 gắn 2 tầng Dấu Ấn.",
           },
           {
-            key: "[Q / 2]",
-            name: "Đảo Ngược Không Gian (Cooldown: 10.5s)",
-            desc: "Phát sóng xung kích đảo ngược phím di chuyển & Joystick của mọi kẻ địch trúng đòn trong 5 giây.",
+            key: "ĐÁNH THƯỜNG",
+            name: "Sovereign Lash (3 Nhịp Xúc Tu Thật)",
+            desc: "Xúc tu gần mục tiêu nhất quất roi kéo nhẹ địch (16px) kèm Motion Trail và gắn 1 tầng Dấu Ấn Sụp Đổ. Nhịp 3 đâm thẳng Xuyên Lõi (sát thương chuẩn nếu địch có ≥2 Dấu Ấn), khựng hình 0.04s và hồi Thể Lực + 4% MaxHP. Đòn ngay sau E2 tự động cường hóa thành Xuyên Lõi.",
           },
           {
-            key: "[R / 3]",
-            name: "Vụ Nổ Triệt Tiêu (Cooldown: 16.0s)",
-            desc: "Vận sức 1.5s tạo hố đen hút mục tiêu trong 450px, sau đó kích nổ sát thương cực đại và thanh tẩy hiệu ứng bất lợi.",
+            key: "[E1 → E2]",
+            name: "Xé Không → Phân Cắt Thực Tại (Cooldown: 6.5s)",
+            desc: "E1 khép hai lưỡi hái chữ X kéo nhẹ mục tiêu, gắn 2 tầng Dấu Ấn Sụp Đổ & Dấu Ấn E2 (3.5s). Tái kích hoạt E2 ở tầm xa để hóa bóng ma khung xương lướt xuyên lưng (sát thương theo % máu mất) và để lại Dư Ảnh Xúc Tu chém bồi sau 0.4s; ở tầm gần xoáy xúc tu 360° thu hoạch toàn bộ Dấu Ấn Sụp Đổ thành Lá Chắn Ảo & Entropy.",
           },
+          {
+            key: "[Q1 → Q2]",
+            name: "Mắt Quỷ Hư Vô → Nuốt Ngược / Đảo Trọng Lực (Cooldown: 9.0s)",
+            desc: "Q1 mở Mắt Quỷ Hư Vô (4.5s) có tia sét tím làm chậm địch, hút ngọc trai để mở rộng tối đa +50% bán kính & gây sát thương theo thời gian. Tái kích hoạt Q2 khi đứng gần hoặc ngắm vào tâm để Nuốt Mắt Quỷ (hồi HP, +25% Tốc/DMG trong 3.2s & giảm 50% hồi chiêu E); hoặc ngắm ra ngoài để kích nổ Đảo Lộn Trọng Lực hất văng, làm choáng 1.2s & lướt thoát thân.",
+          },
+          {
+            key: "[R]",
+            name: "Nhật Thực (100% Entropy) / Giữ [R] Xiềng Xích Địa Ngục (Cooldown: 14.0s)",
+            desc: "• Bấm nhanh [R] khi đủ 100% Entropy: Kích hoạt Nhật Thực Hư Không 7.0s (420px → 980px), giải & miễn nhiễm CC, giảm 35% hồi chiêu E/Q, +15% xuyên giáp & tự gắn Dấu Ấn lên mọi địch trong vùng.\n• Nhấn giữ [R]: Bóp nghẹt âm thanh môi trường, mỗi xúc tu ghim 1–1 tối đa 4→12 mục tiêu, kéo lôi, giảm 25% giáp & hút sinh lực. Kéo mục tiêu ≤22% HP (≤30% HP khi đủ 3 Dấu Ấn / ≤25% HP ở Dạng 7+) vào sát lõi sẽ Hành Quyết Nuốt Chửng (lóe nghịch đảo màu 0.05s, hồi 25% MaxHP + 60 Thể Lực & reset 100% hồi chiêu E/Q).",
+          },
+        ],
+        synergies: [
+          "🔥 Cộng Hưởng E1 × Q1: Chém E1 xuyên qua Mắt Quỷ Q1 khiến Mắt Quỷ nở to và bắn ra 5 mảnh Gai Hư Vô hình nón về phía trước.",
+          "⛓️ Cộng Hưởng R × Q1: Giữ [R] gần Mắt Quỷ Q1 khiến tối đa 4 xúc tu phụ mọc ra trực tiếp từ Mắt Quỷ để trói & rút sinh lực thêm kẻ địch.",
+          "👑 Thức Tỉnh Cấp 7–8 (Apex Form): Kích hoạt Cảnh Báo Nhật Thực sắc tím thẫm toàn bản đồ; ở Cấp 8 vòng nhật thực chuyển hào quang tím-đỏ liên tục, giảm 35% hồi chiêu trong Nhật Thực & xúc tu tự hút ngọc ngoài giao tranh.",
         ],
       };
 
@@ -845,7 +879,7 @@
 
       function renderOmegaTab() {
         const showOmega = matchesQuery(
-          `${OMEGA_NYX0.name} ${OMEGA_NYX0.tier} ${OMEGA_NYX0.stats.join(" ")} ${OMEGA_NYX0.skills.map((s) => `${s.name} ${s.desc}`).join(" ")}`,
+          `${OMEGA_NYX0.name} ${OMEGA_NYX0.tier} ${OMEGA_NYX0.stats.join(" ")} ${OMEGA_NYX0.skills.map((s) => `${s.name} ${s.desc}`).join(" ")} ${OMEGA_NYX0.synergies.join(" ")}`,
         );
         const filteredSpecies = BASE_SPECIES.filter((sp) =>
           matchesQuery(
@@ -879,11 +913,18 @@
                       <span class="pill-tag omega">${sk.key}</span>
                       <b style="color:#fee440;font-size:14px;">${sk.name}</b>
                     </div>
-                    <div style="font-size:12.5px;color:#e0fbfc;line-height:1.48;">${sk.desc}</div>
+                    <div style="font-size:12.5px;color:#e0fbfc;line-height:1.48;white-space:pre-line;">${sk.desc}</div>
                   </div>
                 `,
                   )
                   .join("")}
+              </div>
+
+              <div class="omega-synergy-box">
+                <div style="font-weight:900;color:#fee440;margin-bottom:4px;">
+                  ⚡ CHUỖI CỘNG HƯỞNG &amp; ĐỘT PHÁ CẤP 7–8 (APEX FORM)
+                </div>
+                ${OMEGA_NYX0.synergies.map((line) => `<div>${line}</div>`).join("")}
               </div>
             </div>
           `;
