@@ -345,7 +345,7 @@
         <div class="ency-title">
           <h1>📖 BÁCH KHOA THỦY QUÁI &amp; OMEGA</h1>
           <p>
-            Tra cứu 8 Chuẩn Tiến Hóa • Công Thức Lõi Siêu Cấp • Nhân Vật OMEGA
+            Tra cứu 13 Chuẩn Tiến Hóa • Công Thức Lõi Siêu Cấp • Nhân Vật OMEGA
             NYX-0 • Raid Boss
           </p>
         </div>
@@ -358,7 +358,7 @@
       <div class="controls-bar">
         <div class="tabs-row" id="ency-tabs">
           <button type="button" class="tab-btn active" data-tab="evolution">
-            🧬 8 Chuẩn Tiến Hóa
+            🧬 13 Chuẩn Tiến Hóa
           </button>
           <button type="button" class="tab-btn" data-tab="augments">
             🌟 Lõi Siêu Cấp &amp; Công Thức
@@ -375,7 +375,7 @@
           type="text"
           id="ency-search"
           class="search-input"
-          placeholder="🔍 Tìm kiếm (VD: Dạng 8, NYX-0, Băng, Leviathan)..."
+          placeholder="🔍 Tìm kiếm (VD: Dạng 13, NYX-0, Băng, Leviathan)..."
         />
       </div>
 
@@ -398,89 +398,151 @@
         },
         {
           stage: 2,
-          minLevel: 8,
+          minLevel: 6,
           title: "Dạng 2: Lam Ngọc Thanh Khiết",
-          scaleBonus: 1.15,
-          turnRateMult: 1.16,
-          massHpMult: 1.04,
-          massDmgMult: 1.03,
-          backstabCritBonus: 0.38,
+          scaleBonus: 1.1,
+          turnRateMult: 1.19,
+          massHpMult: 1.03,
+          massDmgMult: 1.02,
+          backstabCritBonus: 0.41,
           gradient: "linear-gradient(90deg, #00f5d4, #0077b6)",
           note: "Mở khóa Lõi Siêu Cấp #1 và Nội Tại Tiến Hóa Dạng 2.",
         },
         {
           stage: 3,
-          minLevel: 18,
-          title: "Dạng 3: Huyết Long Lửa Đỏ",
-          scaleBonus: 1.32,
-          turnRateMult: 1.08,
-          massHpMult: 1.08,
-          massDmgMult: 1.06,
-          backstabCritBonus: 0.32,
-          gradient: "linear-gradient(90deg, #ff4d6d, #ffbe0b)",
-          note: "Đủ điều kiện đánh thức Thủy Quái Leviathan (Lv.18+).",
+          minLevel: 12,
+          title: "Dạng 3: Bích Thủy San Hô",
+          scaleBonus: 1.2,
+          turnRateMult: 1.14,
+          massHpMult: 1.06,
+          massDmgMult: 1.05,
+          backstabCritBonus: 0.37,
+          gradient: "linear-gradient(90deg, #06d6a0, #0b525b)",
+          note: "Đủ điều kiện đánh thức Thủy Quái Leviathan & mọc gai lưng phát sáng.",
         },
         {
           stage: 4,
-          minLevel: 30,
-          title: "Dạng 4: Thủy Thần Neon",
-          scaleBonus: 1.5,
-          turnRateMult: 1.0,
-          massHpMult: 1.12,
-          massDmgMult: 1.1,
-          backstabCritBonus: 0.26,
-          gradient: "linear-gradient(90deg, #f72585, #4cc9f0)",
-          note: "Mở khóa Lõi Siêu Cấp #2 và Nội Tại Tiến Hóa Dạng 4.",
+          minLevel: 19,
+          title: "Dạng 4: Huyết Long Lửa Đỏ",
+          scaleBonus: 1.31,
+          turnRateMult: 1.09,
+          massHpMult: 1.1,
+          massDmgMult: 1.08,
+          backstabCritBonus: 0.33,
+          gradient: "linear-gradient(90deg, #ff4d6d, #9d0208)",
+          note: "Mở khóa Lõi Siêu Cấp #2, Nội Tại Dạng 4 & vòng ma pháp kép.",
         },
         {
           stage: 5,
-          minLevel: 45,
-          title: "Dạng 5: Hải Vương Hoàng Kim",
-          scaleBonus: 1.7,
-          turnRateMult: 0.92,
-          massHpMult: 1.18,
-          massDmgMult: 1.15,
-          backstabCritBonus: 0.2,
-          gradient: "linear-gradient(90deg, #9d4edd, #ffd166)",
-          note: "Xuất hiện sừng uy nghiêm, râu phát quang và 6 tinh cầu hộ thể.",
+          minLevel: 27,
+          title: "Dạng 5: Xích Hỏa Dung Nham",
+          scaleBonus: 1.42,
+          turnRateMult: 1.04,
+          massHpMult: 1.14,
+          massDmgMult: 1.11,
+          backstabCritBonus: 0.29,
+          gradient: "linear-gradient(90deg, #ff6b35, #6a040f)",
+          note: "Xuất hiện sừng uy nghiêm, râu phát quang và đủ điều kiện nhận Lõi Boss.",
         },
         {
           stage: 6,
-          minLevel: 62,
-          title: "Dạng 6: Cổ Thần Lôi Điện",
-          scaleBonus: 1.92,
-          turnRateMult: 0.8,
-          massHpMult: 1.28,
-          massDmgMult: 1.22,
-          backstabCritBonus: 0.14,
-          gradient: "linear-gradient(90deg, #00bbf9, #ff006e)",
+          minLevel: 36,
+          title: "Dạng 6: Thủy Thần Neon",
+          scaleBonus: 1.54,
+          turnRateMult: 0.99,
+          massHpMult: 1.18,
+          massDmgMult: 1.15,
+          backstabCritBonus: 0.25,
+          gradient: "linear-gradient(90deg, #f72585, #3a0ca3)",
           note: "Mở khóa Lõi Siêu Cấp #3, Nội Tại Dạng 6 & tia điện cao áp.",
         },
         {
           stage: 7,
-          minLevel: 80,
-          title: "Dạng 7: Hỗn Độn Thủy Tổ",
-          scaleBonus: 2.15,
-          turnRateMult: 0.7,
-          massHpMult: 1.4,
-          massDmgMult: 1.32,
-          backstabCritBonus: 0.1,
-          gradient: "linear-gradient(90deg, #ff5400, #fee440)",
+          minLevel: 46,
+          title: "Dạng 7: Tử Linh Vực Thẳm",
+          scaleBonus: 1.66,
+          turnRateMult: 0.94,
+          massHpMult: 1.23,
+          massDmgMult: 1.19,
+          backstabCritBonus: 0.21,
+          gradient: "linear-gradient(90deg, #9d4edd, #10002b)",
           note: "Đeo vương miện cổ đại, mắt rực lửa & dải lụa năng lượng sau đuôi.",
         },
         {
           stage: 8,
-          minLevel: 95,
-          title: "Dạng 8: TỐI THƯỢNG CẦU VỒNG",
-          scaleBonus: 2.4,
-          turnRateMult: 0.62,
-          massHpMult: 1.55,
+          minLevel: 56,
+          title: "Dạng 8: Hải Vương Hoàng Kim",
+          scaleBonus: 1.78,
+          turnRateMult: 0.89,
+          massHpMult: 1.28,
+          massDmgMult: 1.24,
+          backstabCritBonus: 0.18,
+          gradient: "linear-gradient(90deg, #ffd166, #7f4f24)",
+          note: "Mở khóa Lõi Siêu Cấp #4 & Nội Tại Tiến Hóa Dạng 8 tối thượng.",
+        },
+        {
+          stage: 9,
+          minLevel: 66,
+          title: "Dạng 9: Cổ Thần Lôi Điện",
+          scaleBonus: 1.91,
+          turnRateMult: 0.84,
+          massHpMult: 1.34,
+          massDmgMult: 1.29,
+          backstabCritBonus: 0.15,
+          gradient: "linear-gradient(90deg, #00bbf9, #ff006e)",
+          note: "Thức tỉnh Cánh Năng Lượng đôi & vòng ấn cổ đại 6 đỉnh.",
+        },
+        {
+          stage: 10,
+          minLevel: 76,
+          title: "Dạng 10: Tinh Hà Huyền Ảo",
+          scaleBonus: 2.04,
+          turnRateMult: 0.78,
+          massHpMult: 1.4,
+          massDmgMult: 1.34,
+          backstabCritBonus: 0.12,
+          gradient: "linear-gradient(90deg, #7209b7, #00f5d4)",
+          note: "Khoác Giáp Tinh Vân lấp lánh sao dọc thân & 11 tinh cầu hộ thể.",
+        },
+        {
+          stage: 11,
+          minLevel: 85,
+          title: "Dạng 11: Hỗn Độn Thủy Tổ",
+          scaleBonus: 2.18,
+          turnRateMult: 0.72,
+          massHpMult: 1.46,
+          massDmgMult: 1.39,
+          backstabCritBonus: 0.1,
+          gradient: "linear-gradient(90deg, #ff5400, #fee440)",
+          note: "Vương Miện Đa Tầng & vòng ấn bát giác phát quang cực mạnh.",
+        },
+        {
+          stage: 12,
+          minLevel: 93,
+          title: "Dạng 12: Thái Cực Thiên Hà",
+          scaleBonus: 2.32,
+          turnRateMult: 0.67,
+          massHpMult: 1.53,
           massDmgMult: 1.45,
           backstabCritBonus: 0.08,
           rainbow: true,
           gradient:
+            "linear-gradient(90deg, #e0aaff, #00f5d4, #fee440, #0f172a)",
+          note: "Ngọc Thái Cực đỉnh vương miện 3 tầng, cánh 3 phiến & hào quang chuyển sắc.",
+        },
+        {
+          stage: 13,
+          minLevel: 100,
+          title: "Dạng 13: TỐI THƯỢNG THÁI CỰC CẦU VỒNG",
+          scaleBonus: 2.46,
+          turnRateMult: 0.62,
+          massHpMult: 1.6,
+          massDmgMult: 1.52,
+          backstabCritBonus: 0.06,
+          rainbow: true,
+          gradient:
             "linear-gradient(90deg, #ff006e, #ffbe0b, #06d6a0, #00bbf9, #8338ec)",
-          note: "Mở khóa Lõi Siêu Cấp #4, Nội Tại tối thượng Dạng 8 & hào quang 12 tinh cầu cầu vồng.",
+          note: "Đỉnh cao tiến hóa Level 100: Hào quang cầu vồng 12 tia, 12 tinh cầu & sức mạnh tối thượng.",
         },
       ];
 
@@ -599,7 +661,7 @@
           "Tốc Độ: 4.55 • Bơi Nhanh: x1.88",
           "Hệ Số Điểm: x1.35 • Tầm Cắn: 1.24x",
           "Tài Nguyên: Entropy (0–100%) & Dấu Ấn Sụp Đổ (3 Tầng)",
-          "Tiến Hóa: 4 → 12 Xúc Tu Quán Tính (8 Cấp • Scale theo Cấp & Kích Cỡ)",
+          "Tiến Hóa: 4 → 12 Xúc Tu Quán Tính (13 Cấp • Scale theo Cấp & Kích Cỡ)",
           "Mở Khóa: 500 💎 / Mở Không Gian + Thời Gian / Dùng Thử Admin",
           "Quy Tắc Đặc Biệt: Vô hiệu hóa Túi Vật Phẩm 3 Ô",
         ],
@@ -638,7 +700,7 @@
         synergies: [
           "🔥 Cộng Hưởng E1 × Q1: Chém E1 xuyên qua Mắt Quỷ Q1 khiến Mắt Quỷ nở to và bắn ra 5 mảnh Gai Hư Vô hình nón về phía trước.",
           "⛓️ Cộng Hưởng R × Q1: Giữ [R] gần Mắt Quỷ Q1 khiến tối đa 4 xúc tu phụ mọc ra trực tiếp từ Mắt Quỷ để trói & rút sinh lực thêm kẻ địch.",
-          "👑 Thức Tỉnh Cấp 7–8 (Apex Form): Kích hoạt Cảnh Báo Nhật Thực sắc tím thẫm toàn bản đồ; ở Cấp 8 vòng nhật thực chuyển hào quang tím-đỏ liên tục, giảm 35% hồi chiêu trong Nhật Thực & xúc tu tự hút ngọc ngoài giao tranh.",
+          "👑 Thức Tỉnh Cấp 7–13 (Apex Form): Kích hoạt Cảnh Báo Nhật Thực sắc tím thẫm toàn bản đồ; từ Cấp 8+ giảm 35% hồi chiêu trong Nhật Thực, xúc tu tự hút ngọc ngoài giao tranh và mở khóa Cánh Hư Không + Vương Miện Đa Tầng.",
         ],
       };
 
@@ -784,14 +846,14 @@
           return `<div class="empty-state">Không tìm thấy Chuẩn Tiến Hóa phù hợp với "${searchQuery}".</div>`;
         }
         return `
-          <div class="section-heading">🧬 8 Chuẩn Tiến Hóa (Level 1 → Level 100)</div>
+          <div class="section-heading">🧬 13 Chuẩn Tiến Hóa (Level 1 → Level 100)</div>
           <div class="cards-grid">
             ${filtered
               .map(
                 (f) => `
               <div class="ency-card ${f.rainbow ? "rainbow-card" : ""}">
                 <div style="display:flex;justify-content:space-between;align-items:center;">
-                  <span class="pill-tag">DẠNG ${f.stage}</span>
+                  <span class="pill-tag">DẠNG ${f.stage}/13</span>
                   <span style="font-size:12px;font-weight:900;color:#00f5d4;">Mở ở Lv.${f.minLevel}+</span>
                 </div>
                 <div style="font-size:16px;font-weight:900;color:#ffffff;">${f.title}</div>
@@ -922,7 +984,7 @@
 
               <div class="omega-synergy-box">
                 <div style="font-weight:900;color:#fee440;margin-bottom:4px;">
-                  ⚡ CHUỖI CỘNG HƯỞNG &amp; ĐỘT PHÁ CẤP 7–8 (APEX FORM)
+                  ⚡ CHUỖI CỘNG HƯỞNG &amp; ĐỘT PHÁ CẤP 7–13 (APEX FORM)
                 </div>
                 ${OMEGA_NYX0.synergies.map((line) => `<div>${line}</div>`).join("")}
               </div>

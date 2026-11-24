@@ -7,312 +7,10 @@
       content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     />
     <meta name="theme-color" content="#01080e" />
-    <title>OCEAN ODYSSEY - Trung Tâm Điều Hành Admin</title>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      }
-
-      html,
-      body {
-        min-height: 100dvh;
-        background: radial-gradient(
-          circle at top center,
-          #160730 0%,
-          #041322 52%,
-          #01060c 100%
-        );
-        color: #f8fafc;
-        overflow-x: hidden;
-        overflow-y: auto;
-      }
-
-      .hidden {
-        display: none !important;
-      }
-
-      /* MÀN HÌNH XÁC THỰC ADMIN */
-      #admin-auth-gate {
-        position: fixed;
-        inset: 0;
-        z-index: 9999;
-        background: radial-gradient(circle at center, #14062b, #01060c);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 14px;
-        text-align: center;
-        padding: 24px;
-      }
-
-      .gate-spinner {
-        width: 48px;
-        height: 48px;
-        border-radius: 50%;
-        border: 4px solid rgba(254, 228, 64, 0.2);
-        border-top-color: #fee440;
-        animation: spinGate 0.85s linear infinite;
-      }
-
-      @keyframes spinGate {
-        to {
-          transform: rotate(360deg);
-        }
-      }
-
-      .admin-shell {
-        max-width: 1260px;
-        margin: 0 auto;
-        padding: 18px 16px 48px;
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-      }
-
-      .admin-topbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 12px;
-        background: rgba(10, 14, 30, 0.9);
-        backdrop-filter: blur(12px);
-        border: 1.5px solid rgba(254, 228, 64, 0.45);
-        border-radius: 18px;
-        padding: 14px 18px;
-        box-shadow: 0 12px 34px rgba(0, 0, 0, 0.65);
-      }
-
-      .admin-title h1 {
-        font-size: clamp(19px, 3.2vw, 26px);
-        font-weight: 900;
-        letter-spacing: 1px;
-        background: linear-gradient(90deg, #fee440, #ff006e, #00f5d4);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-
-      .admin-meta-row {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        flex-wrap: wrap;
-        font-size: 12px;
-        margin-top: 4px;
-      }
-
-      .pill {
-        padding: 4px 10px;
-        border-radius: 999px;
-        background: rgba(0, 0, 0, 0.45);
-        border: 1px solid rgba(100, 223, 223, 0.35);
-        font-weight: 800;
-      }
-
-      .top-actions {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        flex-wrap: wrap;
-      }
-
-      .btn-adm {
-        padding: 9px 14px;
-        border-radius: 11px;
-        border: 1.5px solid rgba(0, 245, 212, 0.48);
-        background: rgba(0, 245, 212, 0.14);
-        color: #00f5d4;
-        font-size: 12px;
-        font-weight: 800;
-        text-decoration: none;
-        cursor: pointer;
-        transition: all 0.18s;
-      }
-
-      .btn-adm:hover {
-        background: rgba(0, 245, 212, 0.28);
-        box-shadow: 0 0 14px rgba(0, 245, 212, 0.3);
-      }
-
-      .btn-adm.gold {
-        border-color: #fee440;
-        background: linear-gradient(90deg, #d97706, #f59e0b);
-        color: #090d15;
-        font-weight: 900;
-      }
-
-      .btn-adm.danger {
-        border-color: #ff4d6d;
-        background: rgba(255, 77, 109, 0.16);
-        color: #ff758f;
-      }
-
-      .btn-adm.omega {
-        border-color: #c77dff;
-        background: linear-gradient(90deg, #5a189a, #9d4edd);
-        color: #ffffff;
-      }
-
-      .admin-grid {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 16px;
-      }
-
-      .adm-panel {
-        background: rgba(7, 18, 32, 0.88);
-        border: 1.5px solid rgba(100, 223, 223, 0.28);
-        border-radius: 18px;
-        padding: 16px 18px;
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.55);
-      }
-
-      .adm-panel h2 {
-        font-size: 15px;
-        font-weight: 900;
-        color: #fee440;
-        text-transform: uppercase;
-        letter-spacing: 0.7px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        padding-bottom: 8px;
-      }
-
-      .form-row {
-        display: flex;
-        gap: 10px;
-        align-items: center;
-        flex-wrap: wrap;
-      }
-
-      .form-col {
-        display: flex;
-        flex-direction: column;
-        gap: 5px;
-        flex: 1;
-        min-width: 160px;
-      }
-
-      .form-col label {
-        font-size: 11px;
-        font-weight: 800;
-        color: #90e0ef;
-        text-transform: uppercase;
-      }
-
-      .adm-input,
-      .adm-select {
-        width: 100%;
-        padding: 9px 12px;
-        border-radius: 10px;
-        border: 1.5px solid rgba(100, 223, 223, 0.35);
-        background: rgba(0, 0, 0, 0.55);
-        color: #ffffff;
-        font-size: 13px;
-        font-weight: 700;
-        outline: none;
-      }
-
-      .adm-input:focus,
-      .adm-select:focus {
-        border-color: #fee440;
-      }
-
-      .summary-box {
-        background: rgba(0, 0, 0, 0.42);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 12px;
-        padding: 10px 12px;
-        font-size: 12px;
-        color: #caf0f8;
-        line-height: 1.5;
-      }
-
-      .event-toggle-card {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 10px;
-        padding: 10px 12px;
-        border-radius: 12px;
-        background: rgba(0, 0, 0, 0.42);
-        border: 1px solid rgba(254, 228, 64, 0.25);
-      }
-
-      .list-scroll {
-        max-height: 240px;
-        overflow-y: auto;
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        padding-right: 4px;
-      }
-
-      .list-row {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 10px;
-        padding: 9px 12px;
-        border-radius: 11px;
-        background: rgba(255, 255, 255, 0.04);
-        border: 1px solid rgba(100, 223, 223, 0.18);
-        font-size: 12px;
-      }
-
-      .list-row:hover {
-        border-color: rgba(254, 228, 64, 0.5);
-      }
-
-      .badge-on {
-        color: #06d6a0;
-        font-weight: 900;
-      }
-
-      .badge-off {
-        color: #94a3b8;
-        font-weight: 800;
-      }
-
-      #adm-toast-container {
-        position: fixed;
-        top: 16px;
-        right: 16px;
-        z-index: 25000;
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        max-width: min(380px, 92vw);
-        pointer-events: none;
-      }
-
-      .adm-toast {
-        pointer-events: auto;
-        background: #090d15;
-        border: 1.5px solid #fee440;
-        border-left: 5px solid #00f5d4;
-        border-radius: 12px;
-        padding: 10px 14px;
-        font-size: 12.5px;
-        font-weight: 700;
-        color: #f8fafc;
-        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.8);
-      }
-
-      @media (max-width: 900px) {
-        .admin-grid {
-          grid-template-columns: 1fr;
-        }
-      }
-    </style>
-    <script type="module" crossorigin src="./assets/augmentsData-C5vEn1RH.js"></script>
-    <script type="module" crossorigin src="./assets/AdminPanel-CbD8HZms.js"></script>
+    <title>OCEAN ODYSSEY - Dashboard Quản Trị Admin</title>
+    <script type="module" crossorigin src="./assets/CreatureRenderer-DPsWXFXQ.js"></script>
+    <script type="module" crossorigin src="./assets/AdminPanel-DDtZUelv.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/admin-BUen13fm.css">
   </head>
   <body>
     <div id="adm-toast-container"></div>
@@ -329,22 +27,40 @@
       </p>
     </div>
 
-    <!-- TRUNG TÂM ĐIỀU HÀNH ADMIN ĐỘC LẬP -->
-    <div id="admin-command-center" class="admin-shell hidden">
-      <header class="admin-topbar">
-        <div class="admin-title">
-          <h1>👑 TRUNG TÂM ĐIỀU HÀNH ADMIN — OCEAN ODYSSEY</h1>
-          <div class="admin-meta-row">
-            <span class="pill" id="adm-admin-badge" style="color: #fee440">
-              👑 Admin: Đang tải...
-            </span>
-            <span class="pill" id="adm-conn-status" style="color: #06d6a0">
-              🟢 Đang kết nối Firebase
-            </span>
-          </div>
+    <!-- DASHBOARD QUẢN TRỊ ADMIN -->
+    <div id="admin-command-center" class="adm-dashboard-shell hidden">
+      <!-- SIDEBAR ĐIỀU HƯỚNG -->
+      <aside class="adm-sidebar">
+        <div class="adm-brand">
+          <h1>👑 OCEAN ODYSSEY</h1>
+          <p>Trung Tâm Quản Trị &amp; Điều Hành CRUD</p>
         </div>
 
-        <div class="top-actions">
+        <div class="adm-meta-stack">
+          <span class="pill" id="adm-admin-badge" style="color: #fee440">
+            👑 Admin: Đang tải...
+          </span>
+          <span class="pill" id="adm-conn-status" style="color: #06d6a0">
+            🟢 Đang kết nối Firebase
+          </span>
+        </div>
+
+        <nav class="adm-nav-list" id="adm-sidebar-tabs">
+          <button type="button" class="adm-nav-btn active" data-tab="users">
+            👥 Quản Lý Người Chơi (CRUD)
+          </button>
+          <button type="button" class="adm-nav-btn" data-tab="bosses">
+            🐉 Raid Boss &amp; Phòng
+          </button>
+          <button type="button" class="adm-nav-btn" data-tab="events">
+            📢 Sự Kiện Server
+          </button>
+          <button type="button" class="adm-nav-btn" data-tab="spectator">
+            👁️ Giám Sát Spectator
+          </button>
+        </nav>
+
+        <div class="adm-sidebar-footer">
           <button
             type="button"
             id="btn-adm-launch-spectator"
@@ -352,245 +68,594 @@
           >
             👁️ Vào Spectator Camera
           </button>
-          <a href="./index.html" class="btn-adm">🏠 Sảnh Chính</a>
-          <a href="./encyclopedia.html" class="btn-adm">📖 Bách Khoa</a>
+          <div class="adm-nav-links-row">
+            <a href="./index.html" class="btn-adm">🏠 Sảnh Chính</a>
+            <a href="./encyclopedia.html" class="btn-adm">📖 Bách Khoa</a>
+          </div>
           <button type="button" id="btn-adm-logout" class="btn-adm danger">
             🚪 Đăng Xuất
           </button>
         </div>
-      </header>
+      </aside>
 
-      <div class="admin-grid">
-        <!-- 1. LIVE-SPAWN RAID BOSS & ĐIỀU CHỈNH HỆ SỐ MÁU -->
-        <section class="adm-panel">
-          <h2>🐉 1. Live-Spawn Raid Boss &amp; Hệ Số Máu</h2>
-
-          <div class="form-row">
-            <div class="form-col">
-              <label for="adm-room-select">Phòng Đang Hoạt Động</label>
-              <select id="adm-room-select" class="adm-select">
-                <option value="GLOBAL_WORLD">GLOBAL_WORLD (PUBLIC)</option>
-              </select>
-            </div>
-            <button
-              type="button"
-              id="btn-adm-refresh-rooms"
-              class="btn-adm"
-              style="align-self: flex-end"
+      <!-- NỘI DUNG DASHBOARD CHÍNH -->
+      <main class="adm-main">
+        <!-- KPI TỔNG QUAN -->
+        <section class="adm-kpi-grid">
+          <div class="adm-kpi-card">
+            <span class="adm-kpi-label">👥 Tổng Tài Khoản</span>
+            <span class="adm-kpi-val" id="adm-kpi-total-users">0</span>
+          </div>
+          <div class="adm-kpi-card">
+            <span class="adm-kpi-label">⏳ Đang Dùng Thử</span>
+            <span
+              class="adm-kpi-val"
+              id="adm-kpi-trial-users"
+              style="color: #00f5d4"
+              >0</span
             >
+          </div>
+          <div class="adm-kpi-card">
+            <span class="adm-kpi-label">🕳️ Sở Hữu NYX-0</span>
+            <span
+              class="adm-kpi-val"
+              id="adm-kpi-nyx-users"
+              style="color: #ff758f"
+              >0</span
+            >
+          </div>
+          <div class="adm-kpi-card">
+            <span class="adm-kpi-label">🌐 Online Trong Phòng</span>
+            <span
+              class="adm-kpi-val"
+              id="adm-kpi-room-players"
+              style="color: #06d6a0"
+              >0</span
+            >
+          </div>
+        </section>
+
+        <!-- TAB 1: QUẢN LÝ NGƯỜI CHƠI (CRUD TABLE) -->
+        <section class="adm-panel" id="adm-tab-users" data-tab-panel="users">
+          <div class="adm-panel-head">
+            <h2>👥 Quản Lý Người Chơi (Bảng CRUD)</h2>
+            <span id="adm-users-count-badge" class="pill" style="color: #00f5d4"
+              >Hiển thị: 0 tài khoản</span
+            >
+          </div>
+
+          <div class="adm-crud-toolbar">
+            <div class="adm-toolbar-top">
+              <div class="adm-search-wrap">
+                <input
+                  type="text"
+                  id="adm-user-search"
+                  class="adm-input"
+                  placeholder="🔍 Tìm kiếm người chơi theo Tên hiển thị hoặc UID..."
+                />
+              </div>
+
+              <div class="adm-sort-group" id="adm-sort-buttons">
+                <span style="font-size: 11px; color: #90e0ef; font-weight: 800"
+                  >Sắp xếp:</span
+                >
+                <button
+                  type="button"
+                  class="adm-sort-btn active"
+                  data-sort="highScore"
+                >
+                  Điểm cao ↓
+                </button>
+                <button type="button" class="adm-sort-btn" data-sort="gems">
+                  Ngọc ↓
+                </button>
+                <button type="button" class="adm-sort-btn" data-sort="name">
+                  Tên A-Z
+                </button>
+              </div>
+            </div>
+
+            <div class="adm-filter-bar">
+              <div class="adm-chip-group" id="adm-filter-chips">
+                <button
+                  type="button"
+                  class="adm-chip-btn active"
+                  data-filter="all"
+                >
+                  Tất cả
+                </button>
+                <button type="button" class="adm-chip-btn" data-filter="nyx0">
+                  🕳️ Có NYX-0
+                </button>
+                <button type="button" class="adm-chip-btn" data-filter="space">
+                  🌌 Có Space
+                </button>
+                <button type="button" class="adm-chip-btn" data-filter="time">
+                  ⏳ Có Time
+                </button>
+                <button type="button" class="adm-chip-btn" data-filter="trial">
+                  ⏱️ Đang dùng thử
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="adm-table-wrap">
+            <table class="adm-crud-table">
+              <thead>
+                <tr>
+                  <th>Người Chơi / UID</th>
+                  <th>Kỷ Lục &amp; Chiến Tích</th>
+                  <th>💎 Ngọc</th>
+                  <th>Loài Đặc Biệt &amp; Dùng Thử</th>
+                  <th>Thao Tác Nhanh</th>
+                </tr>
+              </thead>
+              <tbody id="adm-users-list">
+                <tr>
+                  <td
+                    colspan="5"
+                    style="text-align: center; color: #90e0ef; padding: 22px"
+                  >
+                    Đang tải danh sách tài khoản...
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- TAB 2: RAID BOSS & PHÒNG -->
+        <section
+          class="adm-panel hidden"
+          id="adm-tab-bosses"
+          data-tab-panel="bosses"
+        >
+          <div class="adm-panel-head">
+            <h2>🐉 Live-Spawn Raid Boss &amp; Điều Hành Phòng</h2>
+            <button type="button" id="btn-adm-refresh-rooms" class="btn-adm">
               🔄 Làm Mới Phòng
             </button>
           </div>
 
-          <div class="summary-box" id="adm-room-info-summary">
-            Đang quét danh sách phòng hoạt động...
-          </div>
+          <div class="adm-two-col">
+            <div style="display: flex; flex-direction: column; gap: 12px">
+              <div class="form-col">
+                <label for="adm-room-select">Phòng Đang Hoạt Động</label>
+                <select id="adm-room-select" class="adm-select">
+                  <option value="GLOBAL_WORLD">GLOBAL_WORLD (PUBLIC)</option>
+                </select>
+              </div>
 
-          <div class="form-row">
-            <div class="form-col">
-              <label for="adm-boss-type">Chọn Raid Boss</label>
-              <select id="adm-boss-type" class="adm-select">
-                <option value="leviathan">
-                  🐉 Leviathan Chúa Tể (Gốc: 1.200 HP)
-                </option>
-                <option value="space">
-                  🌌 Boss Không Gian [Lv.50] (Gốc: 3.600 HP)
-                </option>
-                <option value="time">
-                  ⏳ Boss Thời Gian [Lv.75] (Gốc: 5.000 HP)
-                </option>
-              </select>
+              <div class="summary-box" id="adm-room-info-summary">
+                Đang quét danh sách phòng hoạt động...
+              </div>
+
+              <div class="form-row">
+                <div class="form-col">
+                  <label for="adm-boss-type">Chọn Raid Boss</label>
+                  <select id="adm-boss-type" class="adm-select">
+                    <option value="leviathan">
+                      🐉 Leviathan Chúa Tể (Gốc: 1.200 HP)
+                    </option>
+                    <option value="space">
+                      🌌 Boss Không Gian [Lv.50] (Gốc: 3.600 HP)
+                    </option>
+                    <option value="time">
+                      ⏳ Boss Thời Gian [Lv.75] (Gốc: 5.000 HP)
+                    </option>
+                  </select>
+                </div>
+                <div class="form-col">
+                  <label for="adm-boss-map">Khu Vực Triệu Hồi</label>
+                  <select id="adm-boss-map" class="adm-select">
+                    <option value="hybrid">🌐 Đại Dương Hỗn Mang</option>
+                    <option value="coral">🪸 Rạn San Hô</option>
+                    <option value="abyss">🔮 Vực Thẳm</option>
+                    <option value="swamp">🌿 Đầm Lầy</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-col">
+                  <label for="adm-boss-hp-mult"
+                    >Hệ Số Máu &amp; Giáp Boss (0.5x → 10.0x)</label
+                  >
+                  <input
+                    type="number"
+                    id="adm-boss-hp-mult"
+                    class="adm-input"
+                    min="0.5"
+                    max="10"
+                    step="0.25"
+                    value="1.0"
+                  />
+                </div>
+                <div style="display: flex; gap: 8px; align-self: flex-end">
+                  <button
+                    type="button"
+                    id="btn-adm-live-spawn-boss"
+                    class="btn-adm gold"
+                  >
+                    ⚡ TRIỆU HỒI NGAY
+                  </button>
+                  <button
+                    type="button"
+                    id="btn-adm-despawn-boss"
+                    class="btn-adm danger"
+                  >
+                    🗑️ Thu Hồi Boss
+                  </button>
+                </div>
+              </div>
             </div>
-            <div class="form-col">
-              <label for="adm-boss-map">Bản Đồ Triệu Hồi</label>
-              <select id="adm-boss-map" class="adm-select">
-                <option value="hybrid">🌐 Đại Dương Hỗn Mang</option>
-                <option value="coral">🪸 Rạn San Hô</option>
-                <option value="abyss">🔮 Vực Thẳm</option>
-                <option value="swamp">🌿 Đầm Lầy</option>
-              </select>
+
+            <div style="display: flex; flex-direction: column; gap: 10px">
+              <div
+                style="
+                  font-size: 12px;
+                  font-weight: 900;
+                  color: #00f5d4;
+                  text-transform: uppercase;
+                "
+              >
+                🔥 Raid Boss Đang Sống Trong Phòng
+              </div>
+              <div class="list-scroll" id="adm-active-bosses-list"></div>
             </div>
           </div>
-
-          <div class="form-row">
-            <div class="form-col">
-              <label for="adm-boss-hp-mult"
-                >Hệ Số Máu &amp; Giáp Boss (0.5x → 10.0x)</label
-              >
-              <input
-                type="number"
-                id="adm-boss-hp-mult"
-                class="adm-input"
-                min="0.5"
-                max="10"
-                step="0.25"
-                value="1.0"
-              />
-            </div>
-            <div style="display: flex; gap: 8px; align-self: flex-end">
-              <button
-                type="button"
-                id="btn-adm-live-spawn-boss"
-                class="btn-adm gold"
-              >
-                ⚡ TRIỆU HỒI NGAY
-              </button>
-              <button
-                type="button"
-                id="btn-adm-despawn-boss"
-                class="btn-adm danger"
-              >
-                🗑️ Thu Hồi Boss
-              </button>
-            </div>
-          </div>
-
-          <div class="list-scroll" id="adm-active-bosses-list"></div>
         </section>
 
-        <!-- 2. THÔNG BÁO TOÀN SERVER & SỰ KIỆN X2 EXP / NGỌC -->
-        <section class="adm-panel">
-          <h2>📢 2. Global Broadcast &amp; Sự Kiện x2 Toàn Server</h2>
+        <!-- TAB 3: SỰ KIỆN TOÀN SERVER -->
+        <section
+          class="adm-panel hidden"
+          id="adm-tab-events"
+          data-tab-panel="events"
+        >
+          <div class="adm-panel-head">
+            <h2>📢 Thông Báo Toàn Server &amp; Sự Kiện x2</h2>
+          </div>
 
-          <div class="form-col" style="flex: unset">
-            <label for="adm-broadcast-input"
-              >Nội Dung Thông Báo Toàn Server</label
+          <div class="adm-two-col">
+            <div style="display: flex; flex-direction: column; gap: 12px">
+              <div class="form-col">
+                <label for="adm-broadcast-input"
+                  >Nội Dung Thông Báo Toàn Server</label
+                >
+                <input
+                  type="text"
+                  id="adm-broadcast-input"
+                  class="adm-input"
+                  maxlength="140"
+                  placeholder="VD: 🔥 Boss Sử Thi sắp xuất hiện tại Đại Dương Hỗn Mang!"
+                />
+              </div>
+
+              <div class="form-row">
+                <div class="form-col">
+                  <label for="adm-broadcast-duration"
+                    >Thời Lượng Sự Kiện (phút)</label
+                  >
+                  <input
+                    type="number"
+                    id="adm-broadcast-duration"
+                    class="adm-input"
+                    min="1"
+                    max="180"
+                    value="15"
+                  />
+                </div>
+                <button
+                  type="button"
+                  id="btn-adm-send-broadcast"
+                  class="btn-adm gold"
+                  style="align-self: flex-end"
+                >
+                  📣 PHÁT THÔNG BÁO
+                </button>
+              </div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 12px">
+              <div class="event-toggle-card">
+                <div>
+                  <div style="font-weight: 900; color: #00f5d4">
+                    ⚡ Sự Kiện x2 EXP Toàn Server
+                  </div>
+                  <div id="adm-x2exp-status" class="badge-off">
+                    Trạng thái: Đang tắt
+                  </div>
+                </div>
+                <button type="button" id="btn-adm-toggle-x2exp" class="btn-adm">
+                  Bật / Tắt x2 EXP
+                </button>
+              </div>
+
+              <div class="event-toggle-card">
+                <div>
+                  <div style="font-weight: 900; color: #fee440">
+                    💎 Sự Kiện x2 Ngọc (Gems) Toàn Server
+                  </div>
+                  <div id="adm-x2gem-status" class="badge-off">
+                    Trạng thái: Đang tắt
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  id="btn-adm-toggle-x2gem"
+                  class="btn-adm gold"
+                >
+                  Bật / Tắt x2 Ngọc
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 4: GIÁM SÁT SPECTATOR -->
+        <section
+          class="adm-panel hidden"
+          id="adm-tab-spectator"
+          data-tab-panel="spectator"
+        >
+          <div class="adm-panel-head">
+            <h2>👁️ Giám Sát Người Chơi Trong Phòng &amp; Spectator Camera</h2>
+            <button
+              type="button"
+              id="btn-adm-spectator-tab-launch"
+              class="btn-adm omega"
             >
+              👁️ Mở Spectator Tự Do
+            </button>
+          </div>
+
+          <div class="summary-box">
+            Nhấn <b>👁️ Quan Sát</b> bên cạnh bất kỳ người chơi nào trong phòng
+            để vào trận ở trạng thái tàng hình và bám theo mục tiêu trực tiếp,
+            hoặc bấm <b>Chọn UID</b> để mở nhanh hồ sơ CRUD.
+          </div>
+
+          <div class="list-scroll" id="adm-room-players-list"></div>
+        </section>
+      </main>
+    </div>
+
+    <!-- MODAL EDIT CRUD NGƯỜI CHƠI -->
+    <div id="adm-user-edit-modal" class="adm-modal-backdrop hidden">
+      <div class="adm-modal-card" role="dialog" aria-modal="true">
+        <div class="adm-modal-header">
+          <h3>✏️ CHỈNH SỬA HỒ SƠ NGƯỜI CHƠI (CRUD)</h3>
+          <button
+            type="button"
+            id="btn-adm-close-edit-modal"
+            class="btn-adm danger sm"
+          >
+            ✖ Đóng
+          </button>
+        </div>
+
+        <div class="adm-edit-identity">
+          <div>
+            <div
+              id="adm-edit-player-name"
+              style="font-size: 15px; font-weight: 900; color: #ffffff"
+            >
+              Thủy Quái
+            </div>
+            <div
+              id="adm-edit-player-uid"
+              style="font-family: monospace; font-size: 11.5px; color: #00f5d4"
+            >
+              UID: ...
+            </div>
+          </div>
+          <button type="button" id="btn-adm-copy-uid" class="btn-adm sm">
+            📋 Copy UID
+          </button>
+        </div>
+
+        <div class="adm-edit-grid">
+          <div class="form-col">
+            <label for="adm-edit-gems">💎 Số Ngọc (Gems)</label>
             <input
-              type="text"
-              id="adm-broadcast-input"
+              type="number"
+              id="adm-edit-gems"
               class="adm-input"
-              maxlength="140"
-              placeholder="VD: 🔥 Boss Sử Thi sắp xuất hiện tại Đại Dương Hỗn Mang!"
+              min="0"
+              max="99999999"
             />
           </div>
+          <div class="form-col">
+            <label for="adm-edit-highscore">🏆 Kỷ Lục Điểm (HighScore)</label>
+            <input
+              type="number"
+              id="adm-edit-highscore"
+              class="adm-input"
+              min="0"
+              max="10000000"
+            />
+          </div>
+          <div class="form-col">
+            <label for="adm-edit-bosskills">🐉 Số Boss Đã Hạ</label>
+            <input
+              type="number"
+              id="adm-edit-bosskills"
+              class="adm-input"
+              min="0"
+            />
+          </div>
+          <div class="form-col">
+            <label for="adm-edit-pvpkills">⚔️ Số Mạng PvP</label>
+            <input
+              type="number"
+              id="adm-edit-pvpkills"
+              class="adm-input"
+              min="0"
+            />
+          </div>
+        </div>
 
-          <div class="form-row">
-            <div class="form-col">
-              <label for="adm-broadcast-duration"
-                >Thời lượng sự kiện (phút)</label
+        <div style="display: flex; justify-content: flex-end">
+          <button
+            type="button"
+            id="btn-adm-save-user-stats"
+            class="btn-adm gold"
+          >
+            💾 LƯU NGỌC &amp; CHỈ SỐ
+          </button>
+        </div>
+
+        <div
+          style="
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+            padding-top: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+          "
+        >
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              flex-wrap: wrap;
+              gap: 8px;
+            "
+          >
+            <span style="font-size: 13px; font-weight: 900; color: #fee440">
+              🧬 CẤP / THU HỒI QUYỀN SỬ DỤNG &amp; DÙNG THỬ LOÀI ĐẶC BIỆT
+            </span>
+            <div class="adm-preset-row">
+              <label
+                for="adm-edit-trial-hours"
+                style="font-size: 11px; color: #90e0ef; font-weight: 800"
+                >Số giờ Trial:</label
               >
               <input
                 type="number"
-                id="adm-broadcast-duration"
+                id="adm-edit-trial-hours"
                 class="adm-input"
-                min="1"
-                max="180"
-                value="15"
-              />
-            </div>
-            <button
-              type="button"
-              id="btn-adm-send-broadcast"
-              class="btn-adm gold"
-              style="align-self: flex-end"
-            >
-              📣 PHÁT THÔNG BÁO
-            </button>
-          </div>
-
-          <div class="event-toggle-card">
-            <div>
-              <div style="font-weight: 900; color: #00f5d4">
-                ⚡ Sự Kiện x2 EXP Toàn Server
-              </div>
-              <div id="adm-x2exp-status" class="badge-off">
-                Trạng thái: Đang tắt
-              </div>
-            </div>
-            <button type="button" id="btn-adm-toggle-x2exp" class="btn-adm">
-              Bật / Tắt x2 EXP
-            </button>
-          </div>
-
-          <div class="event-toggle-card">
-            <div>
-              <div style="font-weight: 900; color: #fee440">
-                💎 Sự Kiện x2 Ngọc (Gems) Toàn Server
-              </div>
-              <div id="adm-x2gem-status" class="badge-off">
-                Trạng thái: Đang tắt
-              </div>
-            </div>
-            <button
-              type="button"
-              id="btn-adm-toggle-x2gem"
-              class="btn-adm gold"
-            >
-              Bật / Tắt x2 Ngọc
-            </button>
-          </div>
-        </section>
-
-        <!-- 3. CẤP QUYỀN DÙNG THỬ OMEGA NYX-0 & CHỈNH TÀI KHOẢN -->
-        <section class="adm-panel">
-          <h2>🕳️ 3. Cấp Quyền Dùng Thử OMEGA NYX-0 &amp; Tài Khoản</h2>
-
-          <div class="form-row">
-            <div class="form-col">
-              <label for="adm-target-uid">UID Người Chơi Chỉ Định</label>
-              <input
-                type="text"
-                id="adm-target-uid"
-                class="adm-input"
-                placeholder="Nhập hoặc chọn UID bên dưới..."
-              />
-            </div>
-            <div class="form-col" style="max-width: 140px">
-              <label for="adm-nyx-trial-hours">Số Giờ Dùng Thử</label>
-              <input
-                type="number"
-                id="adm-nyx-trial-hours"
-                class="adm-input"
+                style="width: 82px; padding: 5px 8px; font-size: 12px"
                 min="1"
                 max="720"
                 value="24"
               />
-            </div>
-          </div>
-
-          <div class="form-row">
-            <button type="button" id="btn-adm-grant-nyx0" class="btn-adm omega">
-              🕳️ Cấp Quyền NYX-0
-            </button>
-            <button
-              type="button"
-              id="btn-adm-revoke-nyx0"
-              class="btn-adm danger"
-            >
-              ✖ Thu Hồi NYX-0
-            </button>
-            <div style="display: flex; gap: 6px; margin-left: auto">
-              <input
-                type="number"
-                id="adm-user-gems-input"
-                class="adm-input"
-                style="width: 110px"
-                placeholder="Số Ngọc..."
-              />
+              <button type="button" class="adm-chip-btn" data-trial-preset="1">
+                1h
+              </button>
+              <button type="button" class="adm-chip-btn" data-trial-preset="24">
+                24h
+              </button>
+              <button type="button" class="adm-chip-btn" data-trial-preset="72">
+                72h
+              </button>
               <button
                 type="button"
-                id="btn-adm-set-user-gems"
-                class="btn-adm gold"
+                class="adm-chip-btn"
+                data-trial-preset="168"
               >
-                💎 Đặt Ngọc
+                7 ngày
               </button>
             </div>
           </div>
 
-          <div class="list-scroll" id="adm-users-list"></div>
-        </section>
+          <div class="adm-species-grant-grid">
+            <!-- CÁ KHÔNG GIAN -->
+            <div class="adm-grant-card space">
+              <div class="adm-grant-title">🌌 Cá Không Gian</div>
+              <div class="adm-grant-status" id="adm-edit-status-space">
+                Chưa mở
+              </div>
+              <div class="adm-grant-actions">
+                <button
+                  type="button"
+                  class="btn-adm sm"
+                  data-grant-trial="space"
+                >
+                  ⏳ Cấp Dùng Thử
+                </button>
+                <button
+                  type="button"
+                  class="btn-adm success sm"
+                  data-grant-perm="space"
+                >
+                  🔓 Mở Vĩnh Viễn
+                </button>
+                <button
+                  type="button"
+                  class="btn-adm danger sm"
+                  data-revoke-species="space"
+                >
+                  ✖ Thu Hồi
+                </button>
+              </div>
+            </div>
 
-        <!-- 4. NGƯỜI CHƠI TRONG PHÒNG & SPECTATOR CAMERA -->
-        <section class="adm-panel">
-          <h2>👁️ 4. Giám Sát Người Chơi Trong Phòng &amp; Spectator</h2>
-          <div class="summary-box">
-            Nhấn <b>👁️ Quan Sát</b> bên cạnh người chơi hoặc nút
-            <b>Vào Spectator Camera</b> ở góc trên để vào trận ở trạng thái tàng
-            hình, tự do lia góc nhìn hoặc bám theo mục tiêu.
+            <!-- CÁ THỜI GIAN -->
+            <div class="adm-grant-card time">
+              <div class="adm-grant-title">⏳ Cá Thời Gian</div>
+              <div class="adm-grant-status" id="adm-edit-status-time">
+                Chưa mở
+              </div>
+              <div class="adm-grant-actions">
+                <button
+                  type="button"
+                  class="btn-adm sm"
+                  data-grant-trial="time"
+                >
+                  ⏳ Cấp Dùng Thử
+                </button>
+                <button
+                  type="button"
+                  class="btn-adm success sm"
+                  data-grant-perm="time"
+                >
+                  🔓 Mở Vĩnh Viễn
+                </button>
+                <button
+                  type="button"
+                  class="btn-adm danger sm"
+                  data-revoke-species="time"
+                >
+                  ✖ Thu Hồi
+                </button>
+              </div>
+            </div>
+
+            <!-- OMEGA NYX-0 -->
+            <div class="adm-grant-card nyx0">
+              <div class="adm-grant-title">🕳️ OMEGA NYX-0</div>
+              <div class="adm-grant-status" id="adm-edit-status-nyx0">
+                Chưa mở
+              </div>
+              <div class="adm-grant-actions">
+                <button
+                  type="button"
+                  class="btn-adm omega sm"
+                  data-grant-trial="nyx0"
+                >
+                  ⏳ Cấp Dùng Thử
+                </button>
+                <button
+                  type="button"
+                  class="btn-adm success sm"
+                  data-grant-perm="nyx0"
+                >
+                  🔓 Mở Vĩnh Viễn
+                </button>
+                <button
+                  type="button"
+                  class="btn-adm danger sm"
+                  data-revoke-species="nyx0"
+                >
+                  ✖ Thu Hồi
+                </button>
+              </div>
+            </div>
           </div>
-          <div class="list-scroll" id="adm-room-players-list"></div>
-        </section>
+        </div>
       </div>
     </div>
 

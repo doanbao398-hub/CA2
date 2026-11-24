@@ -19,7 +19,7 @@
     <style>
       #game-canvas {
         display: block;
-        width: 100vw;
+        width: 100%;
         height: 100dvh;
         cursor: crosshair;
       }
@@ -43,12 +43,11 @@
         text-decoration: none;
       }
     </style>
-    <script type="module" crossorigin src="./assets/game-D78Cs52X.js"></script>
-    <link rel="modulepreload" crossorigin href="./assets/augmentsData-C5vEn1RH.js">
-    <link rel="modulepreload" crossorigin href="./assets/CreatureRenderer-BFDN3hFT.js">
-    <link rel="modulepreload" crossorigin href="./assets/AdminPanel-CbD8HZms.js">
-    <link rel="stylesheet" crossorigin href="./assets/CreatureRenderer-BpTDSqJg.css">
+    <script type="module" crossorigin src="./assets/game-ocv0AwIL.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/CreatureRenderer-DPsWXFXQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/AdminPanel-DDtZUelv.js">
     <link rel="stylesheet" crossorigin href="./assets/game-Cw8TDYBZ.css">
+    <link rel="stylesheet" crossorigin href="./assets/modals-Zg05rrBZ.css">
   </head>
   <body>
     <canvas id="game-canvas"></canvas>
@@ -807,6 +806,26 @@
           mode: params.get("mode") || "classic",
           name: params.get("name") || "Thủy Quái Chúa",
         };
+
+        if (params.get("fs") === "1") {
+          try {
+            sessionStorage.setItem("wantFullscreen", "1");
+          } catch {}
+        }
+
+        const resetScrollViewport = () => {
+          if (window.scrollX !== 0 || window.scrollY !== 0) {
+            window.scrollTo(0, 0);
+          }
+        };
+
+        window.addEventListener("orientationchange", () => {
+          setTimeout(resetScrollViewport, 80);
+          setTimeout(resetScrollViewport, 240);
+        });
+        window.addEventListener("resize", resetScrollViewport, {
+          passive: true,
+        });
       })();
     </script>
   </body>

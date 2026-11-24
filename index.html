@@ -14,11 +14,10 @@
     />
     <meta name="theme-color" content="#01080e" />
     <title>OCEAN ODYSSEY: EVOLUTION - Sảnh Chính</title>
-    <script type="module" crossorigin src="./assets/main-CsivvQVo.js"></script>
-    <link rel="modulepreload" crossorigin href="./assets/augmentsData-C5vEn1RH.js">
-    <link rel="modulepreload" crossorigin href="./assets/CreatureRenderer-BFDN3hFT.js">
-    <link rel="stylesheet" crossorigin href="./assets/CreatureRenderer-BpTDSqJg.css">
-    <link rel="stylesheet" crossorigin href="./assets/main-CLgyQou9.css">
+    <script type="module" crossorigin src="./assets/main-BSXHhRqj.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/CreatureRenderer-DPsWXFXQ.js">
+    <link rel="stylesheet" crossorigin href="./assets/main-B-3wpNiH.css">
+    <link rel="stylesheet" crossorigin href="./assets/modals-Zg05rrBZ.css">
   </head>
   <body>
     <canvas id="lobby-canvas"></canvas>
@@ -102,7 +101,19 @@
             </button>
 
             <div id="species-showcase" class="species-showcase-card">
-              <div class="showcase-avatar" id="showcase-icon">🗡️</div>
+              <div class="species-preview-wrap">
+                <canvas
+                  id="species-preview-canvas"
+                  width="150"
+                  height="120"
+                ></canvas>
+                <span
+                  class="preview-evo-badge"
+                  id="showcase-saved-badge"
+                  title="Cấp độ &amp; Dạng tiến hóa hiện tại"
+                  >Lv.1 • Dạng 1</span
+                >
+              </div>
               <div>
                 <div class="showcase-header-row">
                   <span class="showcase-name" id="showcase-name"
@@ -111,11 +122,6 @@
                   <span class="rarity-pill common" id="showcase-rarity"
                     >CƠ BẢN</span
                   >
-                  <span
-                    class="stat-chip hidden"
-                    id="showcase-saved-badge"
-                    style="border-color: #fb5607; color: #ffbe0b"
-                  ></span>
                 </div>
                 <div class="showcase-skill" id="showcase-skill">
                   Skill [E]: Xung Kích Xuyên Phá
