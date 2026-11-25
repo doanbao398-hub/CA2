@@ -16,6 +16,7 @@
     <meta name="apple-mobile-web-app-title" content="Ocean Odyssey" />
     <meta name="theme-color" content="#01080e" />
     <title>OCEAN ODYSSEY: Đấu Trường Đại Dương</title>
+    <link rel="stylesheet" href="css/radial-menu.css" />
     <style>
       #game-canvas {
         display: block;
@@ -43,13 +44,13 @@
         text-decoration: none;
       }
     </style>
-    <script type="module" crossorigin src="./assets/game-CcXnRbMz.js"></script>
-    <link rel="modulepreload" crossorigin href="./assets/augmentsData-CMzy9t9e.js">
-    <link rel="modulepreload" crossorigin href="./assets/CreatureRenderer-B_q2dYm-.js">
+    <script type="module" crossorigin src="./assets/game-a3sL59Y8.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/augmentsData-8y6lFnMX.js">
+    <link rel="modulepreload" crossorigin href="./assets/CreatureRenderer-DEWLrJZW.js">
     <link rel="modulepreload" crossorigin href="./assets/speciesPassivesData-CiKMRo2h.js">
-    <link rel="modulepreload" crossorigin href="./assets/AdminPanel-BKbyLZOP.js">
-    <link rel="stylesheet" crossorigin href="./assets/game-DqAzd4y2.css">
-    <link rel="stylesheet" crossorigin href="./assets/modals-Zg05rrBZ.css">
+    <link rel="modulepreload" crossorigin href="./assets/AdminPanel-x9hNbfFk.js">
+    <link rel="stylesheet" crossorigin href="./assets/game-CfVlyWr1.css">
+    <link rel="stylesheet" crossorigin href="./assets/modals-Cg6J1g7s.css">
   </head>
   <body>
     <canvas id="game-canvas"></canvas>
@@ -70,8 +71,8 @@
     </div>
 
     <!-- HUD TRONG GAME -->
-    <div id="ui-layer">
-      <!-- CỤM NÚT CHAT, MIC & TEAM TRÊN CHÍNH GIỮA MÀN HÌNH -->
+    <div id="ui-layer" data-species="fish">
+      <!-- CỤM NÚT CHAT, MIC, TEAM & EMOTE WHEEL TRÊN CHÍNH GIỮA MÀN HÌNH -->
       <div class="top-center-chat-anchor">
         <div class="top-center-comm-bar">
           <button
@@ -104,7 +105,7 @@
               type="button"
               id="btn-cycle-mic-channel"
               class="chat-floating-btn voice-channel-btn"
-              title="Đổi Kênh Thoại (Đội / Tất Cả / Tắt)"
+              title="Đổi Kênh Thoại (Đội / Tất Cả / Tắt) [Y]"
             >
               <span id="mic-channel-icon">🌐</span>
             </button>
@@ -121,6 +122,16 @@
             <span id="team-invite-badge" class="chat-unread-badge hidden"
               >0</span
             >
+          </button>
+
+          <button
+            type="button"
+            id="btn-emote-wheel"
+            class="hud-wheel-trigger-btn"
+            title="Mở Bánh Xe Cảm Xúc [G]"
+          >
+            <span>😊</span>
+            <span class="hud-wheel-key">G</span>
           </button>
         </div>
 
@@ -230,9 +241,10 @@
               type="button"
               class="btn-hud hud-toggle-pill"
               id="btn-toggle-quest"
-              title="Bật/Tắt Nhiệm Vụ Tiến Hóa"
+              title="Bật/Tắt Bảng Nhiệm Vụ"
             >
-              🧬 <span id="evo-counter-pill" style="color: #00f5d4">1/8</span>
+              📜 <span class="hide-xs">NV</span>
+              <span id="evo-counter-pill" style="color: #00f5d4">1/13</span>
             </button>
             <button
               type="button"
@@ -288,8 +300,8 @@
             <div id="leaderboard-list"></div>
           </div>
 
-          <!-- Khung Nhiệm Vụ Tiến Hóa (#quest-hud) -->
-          <div id="quest-hud">
+          <!-- Khung Nhiệm Vụ Tiến Hóa (Mặc định ẩn để không che màn hình) -->
+          <div id="quest-hud" class="quest-hud-collapsed">
             <div
               class="panel-glass quest-panel collapsed-panel"
               id="quest-panel"
@@ -297,7 +309,7 @@
               <div class="quest-title">
                 <span>🧬 Nhiệm Vụ Tiến Hóa</span>
                 <div style="display: flex; align-items: center; gap: 6px">
-                  <span id="evo-counter" style="color: #00f5d4">1/8</span>
+                  <span id="evo-counter" style="color: #00f5d4">1/13</span>
                   <button
                     type="button"
                     class="panel-mini-close"
@@ -321,24 +333,14 @@
             <div class="minimap-wrap" title="Radar Đại Dương">
               <canvas id="minimapCanvas" width="165" height="165"></canvas>
             </div>
-            <div class="emote-bar" id="emote-bar">
-              <button type="button" class="emote-btn" data-emote="👋">
-                👋
-              </button>
-              <button type="button" class="emote-btn" data-emote="😂">
-                😂
-              </button>
-              <button type="button" class="emote-btn" data-emote="😡">
-                😡
-              </button>
-              <button type="button" class="emote-btn" data-emote="🤝">
-                🤝
-              </button>
-            </div>
           </div>
 
-          <!-- CẦN GẠT ẢO THẢ NỔI CHO ĐIỆN THOẠI -->
-          <div id="mobile-joystick-zone" class="mobile-joystick-zone">
+          <!-- CẦN GẠT ẢO THẢ NỔI CHO ĐIỆN THOẠI (THEME ĐỘNG THEO LOÀI) -->
+          <div
+            id="mobile-joystick-zone"
+            class="mobile-joystick-zone"
+            data-species="fish"
+          >
             <div id="mobile-joystick-base" class="mobile-joystick-base">
               <div
                 id="mobile-joystick-stick"
@@ -348,25 +350,37 @@
           </div>
         </div>
 
-        <!-- Thanh Thể Lực PC + Túi Vật Phẩm Chiến Thuật 3 Ô -->
+        <!-- Thanh Thể Lực PC + Túi Vật Phẩm Chiến Thuật 3 Ô + Nút Bánh Xe Chiến Thuật -->
         <div class="controls-center">
-          <div
-            class="quick-bag-bar"
-            id="quick-bag-bar"
-            title="Túi Vật Phẩm Nhanh [Phím 1-2-3 hoặc Chạm]"
-          >
-            <div class="bag-slot empty" data-slot="0">
-              <span class="slot-key">1</span>
-              <span class="slot-icon"></span>
+          <div class="bag-and-wheel-row">
+            <div
+              class="quick-bag-bar"
+              id="quick-bag-bar"
+              title="Túi Vật Phẩm Nhanh [Phím 1-2-3 hoặc Chạm]"
+            >
+              <div class="bag-slot empty" data-slot="0">
+                <span class="slot-key">1</span>
+                <span class="slot-icon"></span>
+              </div>
+              <div class="bag-slot empty" data-slot="1">
+                <span class="slot-key">2</span>
+                <span class="slot-icon"></span>
+              </div>
+              <div class="bag-slot empty" data-slot="2">
+                <span class="slot-key">3</span>
+                <span class="slot-icon"></span>
+              </div>
             </div>
-            <div class="bag-slot empty" data-slot="1">
-              <span class="slot-key">2</span>
-              <span class="slot-icon"></span>
-            </div>
-            <div class="bag-slot empty" data-slot="2">
-              <span class="slot-key">3</span>
-              <span class="slot-icon"></span>
-            </div>
+
+            <button
+              type="button"
+              id="btn-radial-menu"
+              class="hud-wheel-trigger-btn tactical-btn"
+              title="Mở Bánh Xe Vật Phẩm &amp; Skill Boss [B]"
+            >
+              <span>🎡</span>
+              <span class="hud-wheel-key">B</span>
+            </button>
           </div>
 
           <div
@@ -374,7 +388,7 @@
             style="text-align: center; padding: 8px 14px"
           >
             <div class="stat-label" id="stamina-label">
-              Giữ Chuột / Space: Bơi Nhanh • Giữ Tab: Xem Build
+              Giữ Chuột / Space: Bơi Nhanh • Giữ Tab: Xem Build • G/B: Bánh Xe
             </div>
             <div class="bar-wrap" style="width: 150px">
               <div id="stamina-bar"></div>
@@ -382,15 +396,15 @@
           </div>
         </div>
 
-        <!-- Cụm Nút Kỹ Năng Vòng Cung MOBA, Skill Boss & Tăng Tốc Góc Phải -->
-        <div class="action-cluster-right">
+        <!-- Cụm Nút Kỹ Năng Vòng Cung MOBA (Theme theo loài), Skill Boss & Tăng Tốc Góc Phải -->
+        <div class="action-cluster-right" data-species="fish">
           <div id="boss-skills-bar" class="boss-skills-bar"></div>
 
           <div class="native-skills-row moba-arc-pad">
             <div class="skill-box moba-btn-e" id="skill-box">
               <div class="skill-cd-sweep" id="skill-sweep-e"></div>
               <div class="skill-cd-big" id="skill-cd-big-e"></div>
-              <div class="skill-key">E</div>
+              <div class="skill-key" id="skill-icon-e">E</div>
               <div class="skill-info-wrap">
                 <div class="skill-title-text" id="hud-skill-name">
                   Xung Kích
@@ -404,7 +418,7 @@
             <div class="skill-box moba-btn-q hidden" id="skill2-box">
               <div class="skill-cd-sweep" id="skill-sweep-q"></div>
               <div class="skill-cd-big" id="skill-cd-big-q"></div>
-              <div class="skill-key">Q</div>
+              <div class="skill-key" id="skill-icon-q">Q</div>
               <div class="skill-info-wrap">
                 <div class="skill-title-text" id="hud-skill2-name">Lát Cắt</div>
                 <div class="skill-subtext" id="hud-skill2-status">
@@ -416,7 +430,7 @@
             <div class="skill-box moba-btn-r cooldown" id="ult-box">
               <div class="skill-cd-sweep" id="skill-sweep-r"></div>
               <div class="skill-cd-big" id="skill-cd-big-r"></div>
-              <div class="skill-key">R</div>
+              <div class="skill-key" id="skill-icon-r">R</div>
               <div class="skill-info-wrap">
                 <div class="skill-title-text" id="hud-ult-name">Hóa Thần</div>
                 <div class="skill-subtext" id="hud-ult-status">Nộ: 0%</div>
@@ -424,7 +438,7 @@
             </div>
 
             <button type="button" id="mobile-boost-btn" class="moba-btn-boost">
-              <span class="boost-ico">⚡</span>
+              <span class="boost-ico" id="skill-icon-boost">⚡</span>
               <span class="boost-lbl">BƠI NHANH</span>
             </button>
           </div>
@@ -600,19 +614,16 @@
       </div>
     </div>
 
-    <!-- MODAL CÀI ĐẶT PC & MOBILE -->
+    <!-- MODAL CÀI ĐẶT PC & MOBILE (GỌN & CHUYÊN NGHIỆP) -->
     <div id="settings-screen" class="modal-screen hidden">
-      <div class="lobby-container" style="width: 560px">
-        <div
-          style="
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-          "
-        >
-          <h2 style="font-size: 20px; color: #00f5d4; font-weight: 900">
-            ⚙️ CÀI ĐẶT TRÒ CHƠI
-          </h2>
+      <div class="lobby-container settings-modal-card" style="width: 590px">
+        <div class="settings-modal-header">
+          <div>
+            <h2>⚙️ CÀI ĐẶT HỆ THỐNG</h2>
+            <div id="settings-device-badge" class="device-detect-pill">
+              💻 Thiết bị: Máy Tính (PC / Laptop)
+            </div>
+          </div>
           <button
             type="button"
             id="btn-close-settings"
@@ -623,94 +634,204 @@
           </button>
         </div>
 
-        <div id="settings-device-badge" class="device-detect-pill">
-          💻 Thiết bị: Máy Tính (PC / Laptop)
-        </div>
-
         <div class="settings-tabs">
           <button
             type="button"
             class="settings-tab-btn active"
             data-tab="general"
           >
-            🔊 Âm Thanh &amp; Đồ Họa
+            🎛️ Đồ Họa &amp; Âm Thanh
           </button>
           <button type="button" class="settings-tab-btn" data-tab="controls">
-            🎮 Điều Khiển &amp; HUD
+            🎮 Camera &amp; Điều Khiển
           </button>
           <button type="button" class="settings-tab-btn" data-tab="keybinds">
-            ⌨️ Phím Skill
+            ⌨️ Phím Skill Boss
           </button>
         </div>
 
-        <!-- TAB 1: ÂM THANH & ĐỒ HỌA -->
+        <!-- TAB 1: ĐỒ HỌA, TỰ ĐỘNG CẤU HÌNH & ÂM THANH -->
         <div id="settings-tab-general" class="settings-body">
-          <div class="setting-row">
-            <span>🔊 Âm lượng hiệu ứng (SFX): <b id="set-sfx-val">80%</b></span>
-            <input
-              type="range"
-              id="set-sfx-volume"
-              min="0"
-              max="1"
-              step="0.05"
-              value="0.8"
-            />
+          <div class="settings-section-card">
+            <div class="settings-sec-title">🔊 Âm Thanh</div>
+            <div class="setting-row">
+              <div class="setting-info">
+                <span class="setting-name"
+                  >Âm lượng hiệu ứng (SFX):
+                  <b id="set-sfx-val" style="color: #00f5d4">80%</b></span
+                >
+              </div>
+              <input
+                type="range"
+                id="set-sfx-volume"
+                class="setting-slider"
+                min="0"
+                max="1"
+                step="0.05"
+                value="0.8"
+              />
+            </div>
+
+            <div class="setting-row">
+              <div class="setting-info">
+                <span class="setting-name">Tắt toàn bộ âm thanh</span>
+                <span class="setting-sub"
+                  >Ngắt cả âm thanh nền đại dương và hiệu ứng chiến đấu</span
+                >
+              </div>
+              <label class="setting-switch">
+                <input type="checkbox" id="set-sfx-mute" />
+                <span class="setting-switch-track"></span>
+              </label>
+            </div>
           </div>
 
-          <div class="setting-row">
-            <span>🔇 Tắt toàn bộ âm thanh</span>
-            <input type="checkbox" id="set-sfx-mute" />
-          </div>
+          <div class="settings-section-card">
+            <div class="settings-sec-title">⚡ Hiệu Năng &amp; Hình Ảnh</div>
+            <div class="setting-row">
+              <div class="setting-info">
+                <span class="setting-name"
+                  >Tự động điều chỉnh cấu hình (Auto Quality)</span
+                >
+                <span class="setting-sub"
+                  >Tự hạ khi FPS thấp và tự tăng lại khi máy chạy mượt ổn
+                  định</span
+                >
+              </div>
+              <label class="setting-switch">
+                <input type="checkbox" id="set-auto-quality" checked />
+                <span class="setting-switch-track"></span>
+              </label>
+            </div>
 
-          <div class="setting-row">
-            <span
-              >🔍 Tầm Nhìn / Zoom Camera: <b id="set-zoom-val">1.00x</b></span
-            >
-            <input
-              type="range"
-              id="set-camera-zoom"
-              min="0.65"
-              max="1.35"
-              step="0.05"
-              value="1.0"
-            />
-          </div>
+            <div class="setting-row">
+              <div class="setting-info">
+                <span class="setting-name"
+                  >Chất lượng hiệu ứng &amp; nền 3D</span
+                >
+                <span class="setting-sub"
+                  >Điều chỉnh mật độ hạt, ánh sáng và độ chi tiết bản đồ</span
+                >
+              </div>
+              <select
+                id="set-particle-quality"
+                class="lobby-input setting-select"
+              >
+                <option value="high">Cao (Mượt đẹp)</option>
+                <option value="medium">Trung bình</option>
+                <option value="low">Thấp (Tiết kiệm pin)</option>
+              </select>
+            </div>
 
-          <div class="setting-row">
-            <span>✨ Chất lượng hiệu ứng hạt &amp; bong bóng</span>
-            <select
-              id="set-particle-quality"
-              class="lobby-input"
-              style="width: 150px; padding: 6px"
-            >
-              <option value="high">Cao (Mượt đẹp)</option>
-              <option value="medium">Trung bình</option>
-              <option value="low">Thấp (Tiết kiệm pin)</option>
-            </select>
-          </div>
+            <div class="setting-row">
+              <div class="setting-info">
+                <span class="setting-name">Rung màn hình khi va chạm mạnh</span>
+              </div>
+              <label class="setting-switch">
+                <input type="checkbox" id="set-screen-shake" checked />
+                <span class="setting-switch-track"></span>
+              </label>
+            </div>
 
-          <div class="setting-row">
-            <span>📳 Rung màn hình khi va chạm mạnh</span>
-            <input type="checkbox" id="set-screen-shake" checked />
-          </div>
-
-          <div class="setting-row">
-            <span>💬 Hiển thị chữ sát thương &amp; điểm bay</span>
-            <input type="checkbox" id="set-floating-text" checked />
+            <div class="setting-row">
+              <div class="setting-info">
+                <span class="setting-name"
+                  >Chữ sát thương &amp; điểm bay nổi</span
+                >
+              </div>
+              <label class="setting-switch">
+                <input type="checkbox" id="set-floating-text" checked />
+                <span class="setting-switch-track"></span>
+              </label>
+            </div>
           </div>
         </div>
 
-        <!-- TAB 2: ĐIỀU KHIỂN PC / MOBILE -->
+        <!-- TAB 2: CAMERA ZOOM & ĐIỀU KHIỂN PC / MOBILE -->
         <div id="settings-tab-controls" class="settings-body hidden">
-          <div id="settings-pc-section">
+          <div class="settings-section-card">
+            <div class="settings-sec-title">🔭 Camera &amp; Tầm Nhìn</div>
             <div class="setting-row">
-              <span
-                >🖱️ Độ nhạy xoay hướng chuột:
-                <b id="set-sens-val">1.0x</b></span
-              >
+              <div class="setting-info">
+                <span class="setting-name"
+                  >Tự động Zoom theo kích thước cá</span
+                >
+                <span class="setting-sub"
+                  >Bật: Tự thu phóng khi tiến hóa • Tắt: Khóa mức Zoom bên
+                  dưới</span
+                >
+              </div>
+              <label class="setting-switch">
+                <input type="checkbox" id="set-auto-zoom" checked />
+                <span class="setting-switch-track"></span>
+              </label>
+            </div>
+
+            <div class="setting-row">
+              <div class="setting-info">
+                <span class="setting-name"
+                  >Mức Zoom Camera:
+                  <b id="set-zoom-val" style="color: #00f5d4">1.00x</b></span
+                >
+                <span class="setting-sub" id="set-zoom-hint"
+                  >Nhân thêm vào tầm nhìn tự động</span
+                >
+              </div>
+              <input
+                type="range"
+                id="set-camera-zoom"
+                class="setting-slider"
+                min="0.65"
+                max="1.35"
+                step="0.05"
+                value="1.0"
+              />
+            </div>
+
+            <div class="setting-row">
+              <div class="setting-info">
+                <span class="setting-name">Lia Camera quan sát bản đồ</span>
+              </div>
+              <label class="setting-switch">
+                <input type="checkbox" id="set-camera-pan" checked />
+                <span class="setting-switch-track"></span>
+              </label>
+            </div>
+
+            <div class="setting-row">
+              <div class="setting-info">
+                <span class="setting-name"
+                  >Độ rõ giao diện HUD:
+                  <b id="set-hud-opacity-val" style="color: #00f5d4"
+                    >95%</b
+                  ></span
+                >
+              </div>
+              <input
+                type="range"
+                id="set-hud-opacity"
+                class="setting-slider"
+                min="0.45"
+                max="1.0"
+                step="0.05"
+                value="0.95"
+              />
+            </div>
+          </div>
+
+          <div id="settings-pc-section" class="settings-section-card">
+            <div class="settings-sec-title">🖱️ Điều Khiển PC</div>
+            <div class="setting-row">
+              <div class="setting-info">
+                <span class="setting-name"
+                  >Độ nhạy xoay hướng chuột:
+                  <b id="set-sens-val" style="color: #00f5d4">1.0x</b></span
+                >
+              </div>
               <input
                 type="range"
                 id="set-mouse-sens"
+                class="setting-slider"
                 min="0.5"
                 max="2.0"
                 step="0.1"
@@ -718,21 +839,18 @@
               />
             </div>
             <div class="pc-keybind-guide">
-              <div><b>Di chuyển:</b> Rê chuột trên màn hình</div>
+              <div><b>Di chuyển:</b> Rê chuột hoặc phím <code>WASD</code></div>
               <div>
-                <b>Bơi nhanh:</b> Giữ Chuột Trái hoặc phím <code>Space</code>
+                <b>Bơi nhanh:</b> Giữ Chuột Trái hoặc <code>Space</code>
               </div>
               <div>
-                <b>Kỹ năng gốc:</b> Giữ/Bấm <code>E</code> / <code>Q</code> |
-                <b>Chiêu cuối:</b> <code>R</code>
+                <b>Kỹ năng:</b> <code>E</code> / <code>Q</code> /
+                <code>R</code> | <b>Soi Build:</b> Giữ <code>Tab</code>
               </div>
               <div>
-                <b>Soi nhanh Build &amp; Chỉ số:</b> Giữ phím <code>Tab</code>
-              </div>
-              <div>
-                <b>Skill Boss Sử Thi:</b> Mặc định <code>Z</code>,
-                <code>X</code>, <code>C</code>, <code>V</code>, <code>B</code>,
-                <code>F</code> (đổi tại tab <b>Phím Skill</b>)
+                <b>Bánh Xe Cảm Xúc:</b> <code>G</code> |
+                <b>Bánh Xe Chiến Thuật:</b> <code>B</code> | <b>Mic:</b>
+                <code>M</code> / <code>Y</code>
               </div>
               <div>
                 <b>Túi đồ nhanh:</b> Phím <code>1</code>, <code>2</code>,
@@ -741,10 +859,14 @@
             </div>
           </div>
 
-          <div id="settings-mobile-section" class="hidden">
+          <div
+            id="settings-mobile-section"
+            class="settings-section-card hidden"
+          >
+            <div class="settings-sec-title">📱 Điều Khiển Cảm Ứng</div>
             <div class="setting-col">
-              <span style="font-weight: 800; color: #fee440"
-                >🕹️ Chế độ điều hướng cảm ứng:</span
+              <span style="font-weight: 800; color: #fee440; font-size: 12px"
+                >Chế độ điều hướng:</span
               >
               <label class="radio-option">
                 <input
@@ -767,13 +889,18 @@
             </div>
 
             <div class="setting-row">
-              <span
-                >🔘 Kích cỡ nút bấm &amp; Joystick:
-                <b id="set-btn-scale-val">100%</b></span
-              >
+              <div class="setting-info">
+                <span class="setting-name"
+                  >Kích cỡ nút bấm &amp; Joystick:
+                  <b id="set-btn-scale-val" style="color: #00f5d4"
+                    >100%</b
+                  ></span
+                >
+              </div>
               <input
                 type="range"
                 id="set-mobile-btn-scale"
+                class="setting-slider"
                 min="0.75"
                 max="1.35"
                 step="0.05"
@@ -782,35 +909,18 @@
             </div>
 
             <div class="setting-row">
-              <span>🖐️ Kéo thả vị trí cụm nút Mobile</span>
+              <div class="setting-info">
+                <span class="setting-name">Tùy chỉnh vị trí nút Mobile</span>
+              </div>
               <button
                 type="button"
                 id="btn-open-hud-editor"
                 class="btn-hud"
                 style="border-color: #fee440; color: #fee440"
               >
-                🎯 Tùy Chỉnh Vị Trí
+                🎯 Kéo Thả Vị Trí
               </button>
             </div>
-          </div>
-
-          <div class="setting-row">
-            <span>🗺️ Lia Camera quan sát bản đồ</span>
-            <input type="checkbox" id="set-camera-pan" checked />
-          </div>
-
-          <div class="setting-row">
-            <span
-              >👁️ Độ rõ giao diện HUD: <b id="set-hud-opacity-val">95%</b></span
-            >
-            <input
-              type="range"
-              id="set-hud-opacity"
-              min="0.45"
-              max="1.0"
-              step="0.05"
-              value="0.95"
-            />
           </div>
         </div>
 
@@ -832,7 +942,7 @@
           </button>
         </div>
 
-        <div style="display: flex; justify-content: space-between; gap: 10px">
+        <div class="settings-modal-footer">
           <button type="button" id="btn-reset-settings" class="btn-hud">
             🔄 Khôi Phục Mặc Định
           </button>

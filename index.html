@@ -14,11 +14,11 @@
     />
     <meta name="theme-color" content="#01080e" />
     <title>OCEAN ODYSSEY: EVOLUTION - Sảnh Chính</title>
-    <script type="module" crossorigin src="./assets/main-DLukMrY6.js"></script>
-    <link rel="modulepreload" crossorigin href="./assets/augmentsData-CMzy9t9e.js">
-    <link rel="modulepreload" crossorigin href="./assets/CreatureRenderer-B_q2dYm-.js">
-    <link rel="stylesheet" crossorigin href="./assets/main-B-3wpNiH.css">
-    <link rel="stylesheet" crossorigin href="./assets/modals-Zg05rrBZ.css">
+    <script type="module" crossorigin src="./assets/main-BxDULB7P.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/augmentsData-8y6lFnMX.js">
+    <link rel="modulepreload" crossorigin href="./assets/CreatureRenderer-DEWLrJZW.js">
+    <link rel="stylesheet" crossorigin href="./assets/main-CW4CsfFG.css">
+    <link rel="stylesheet" crossorigin href="./assets/modals-Cg6J1g7s.css">
   </head>
   <body>
     <canvas id="lobby-canvas"></canvas>
@@ -72,7 +72,7 @@
             </button>
             <button
               type="button"
-              class="btn-hud"
+              class="btn-hud btn-fullscreen-toggle"
               id="btn-lobby-fullscreen"
               title="Toàn Màn Hình"
             >
@@ -186,9 +186,7 @@
             <div class="card-option" data-map="coral">
               <div class="card-icon">🪸</div>
               <div class="card-title">Rạn San Hô Ánh Dương</div>
-              <div class="card-skill" style="color: #00f5d4">
-                Vùng Hồi Sinh San Hô
-              </div>
+              <div class="card-skill" style="color: #00f5d4">Bản Đồ San Hô</div>
               <div class="card-desc">
                 Bụi tảo tàng hình, tàu đắm, sao biển &amp; hải lưu ấm.
               </div>
@@ -197,7 +195,7 @@
               <div class="card-icon">🔮</div>
               <div class="card-title">Vực Thẳm Phát Quang</div>
               <div class="card-skill" style="color: #00f5d4">
-                Vùng Hồi Sinh Vực Thẳm
+                Bản Đồ Vực Thẳm
               </div>
               <div class="card-desc">
                 Núi lửa phun trào, sứa phát sáng &amp; nhiều Ngọc Trai.
@@ -207,7 +205,7 @@
               <div class="card-icon">🌿</div>
               <div class="card-title">Rừng Ngập Mặn Huyền Bí</div>
               <div class="card-skill" style="color: #00f5d4">
-                Vùng Hồi Sinh Đầm Lầy
+                Bản Đồ Đầm Lầy
               </div>
               <div class="card-desc">
                 Rễ đước ẩn nấp, cột đá cổ đại và hệ sinh thái giàu XP.
@@ -309,19 +307,16 @@
       </div>
     </div>
 
-    <!-- MODAL CÀI ĐẶT -->
+    <!-- MODAL CÀI ĐẶT (GỌN & ĐỒNG BỘ VỚI TRONG TRẬN) -->
     <div id="settings-screen" class="modal-screen hidden">
-      <div class="lobby-container" style="width: 540px">
-        <div
-          style="
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-          "
-        >
-          <h2 style="font-size: 20px; color: #00f5d4; font-weight: 900">
-            ⚙️ CÀI ĐẶT HỆ THỐNG
-          </h2>
+      <div class="lobby-container settings-modal-card" style="width: 560px">
+        <div class="settings-modal-header">
+          <div>
+            <h2>⚙️ CÀI ĐẶT HỆ THỐNG</h2>
+            <div class="device-detect-pill">
+              🎛️ Tùy chỉnh Âm Thanh, Đồ Họa Tự Động &amp; Camera
+            </div>
+          </div>
           <button
             type="button"
             id="btn-close-settings"
@@ -333,53 +328,120 @@
         </div>
 
         <div class="settings-body">
-          <div class="setting-row">
-            <span>🔊 Âm lượng hiệu ứng (SFX): <b id="set-sfx-val">80%</b></span>
-            <input
-              type="range"
-              id="set-sfx-volume"
-              min="0"
-              max="1"
-              step="0.05"
-              value="0.8"
-            />
+          <div class="settings-section-card">
+            <div class="settings-sec-title">🔊 Âm Thanh</div>
+            <div class="setting-row">
+              <div class="setting-info">
+                <span class="setting-name"
+                  >Âm lượng hiệu ứng (SFX):
+                  <b id="set-sfx-val" style="color: #00f5d4">80%</b></span
+                >
+              </div>
+              <input
+                type="range"
+                id="set-sfx-volume"
+                class="setting-slider"
+                min="0"
+                max="1"
+                step="0.05"
+                value="0.8"
+              />
+            </div>
+
+            <div class="setting-row">
+              <div class="setting-info">
+                <span class="setting-name">Tắt toàn bộ âm thanh</span>
+              </div>
+              <label class="setting-switch">
+                <input type="checkbox" id="set-sfx-mute" />
+                <span class="setting-switch-track"></span>
+              </label>
+            </div>
           </div>
-          <div class="setting-row">
-            <span>🔇 Tắt toàn bộ âm thanh</span>
-            <input type="checkbox" id="set-sfx-mute" />
-          </div>
-          <div class="setting-row">
-            <span
-              >🔍 Tầm Nhìn / Zoom Camera: <b id="set-zoom-val">1.00x</b></span
-            >
-            <input
-              type="range"
-              id="set-camera-zoom"
-              min="0.65"
-              max="1.35"
-              step="0.05"
-              value="1.0"
-            />
-          </div>
-          <div class="setting-row">
-            <span>✨ Chất lượng hiệu ứng hạt</span>
-            <select
-              id="set-particle-quality"
-              class="lobby-input"
-              style="width: 160px; padding: 6px"
-            >
-              <option value="high">Cao (60 FPS)</option>
-              <option value="medium">Trung bình</option>
-              <option value="low">Thấp (Tiết kiệm pin)</option>
-            </select>
-          </div>
-          <div class="setting-row">
-            <span>📳 Rung màn hình khi va chạm mạnh</span>
-            <input type="checkbox" id="set-screen-shake" checked />
+
+          <div class="settings-section-card">
+            <div class="settings-sec-title">⚡ Đồ Họa &amp; Camera</div>
+            <div class="setting-row">
+              <div class="setting-info">
+                <span class="setting-name"
+                  >Tự động điều chỉnh cấu hình (Auto Quality)</span
+                >
+                <span class="setting-sub"
+                  >Tự hạ khi FPS thấp và tự tăng lại khi máy ổn định</span
+                >
+              </div>
+              <label class="setting-switch">
+                <input type="checkbox" id="set-auto-quality" checked />
+                <span class="setting-switch-track"></span>
+              </label>
+            </div>
+
+            <div class="setting-row">
+              <div class="setting-info">
+                <span class="setting-name"
+                  >Chất lượng hiệu ứng &amp; nền 3D</span
+                >
+              </div>
+              <select
+                id="set-particle-quality"
+                class="lobby-input setting-select"
+              >
+                <option value="high">Cao (60 FPS)</option>
+                <option value="medium">Trung bình</option>
+                <option value="low">Thấp (Tiết kiệm pin)</option>
+              </select>
+            </div>
+
+            <div class="setting-row">
+              <div class="setting-info">
+                <span class="setting-name"
+                  >Tự động Zoom theo kích thước cá</span
+                >
+                <span class="setting-sub"
+                  >Bật: Tự thu phóng khi tiến hóa • Tắt: Khóa mức Zoom bên
+                  dưới</span
+                >
+              </div>
+              <label class="setting-switch">
+                <input type="checkbox" id="set-auto-zoom" checked />
+                <span class="setting-switch-track"></span>
+              </label>
+            </div>
+
+            <div class="setting-row">
+              <div class="setting-info">
+                <span class="setting-name"
+                  >Mức Zoom Camera:
+                  <b id="set-zoom-val" style="color: #00f5d4">1.00x</b></span
+                >
+                <span class="setting-sub" id="set-zoom-hint"
+                  >Nhân thêm vào tầm nhìn tự động</span
+                >
+              </div>
+              <input
+                type="range"
+                id="set-camera-zoom"
+                class="setting-slider"
+                min="0.65"
+                max="1.35"
+                step="0.05"
+                value="1.0"
+              />
+            </div>
+
+            <div class="setting-row">
+              <div class="setting-info">
+                <span class="setting-name">Rung màn hình khi va chạm mạnh</span>
+              </div>
+              <label class="setting-switch">
+                <input type="checkbox" id="set-screen-shake" checked />
+                <span class="setting-switch-track"></span>
+              </label>
+            </div>
           </div>
         </div>
 
-        <div style="display: flex; justify-content: flex-end; gap: 10px">
+        <div class="settings-modal-footer">
           <button
             type="button"
             id="btn-save-close-settings"
