@@ -15,7 +15,7 @@
     />
     <meta name="apple-mobile-web-app-title" content="Ocean Odyssey" />
     <meta name="theme-color" content="#01080e" />
-    <title>OCEAN ODYSSEY: Đấu Trường Đại Dương</title>
+    <title>OCEAN ODYSSEY: Đấu Trường Đại Dương</title>
     <style>
       #game-canvas {
         display: block;
@@ -43,12 +43,12 @@
         text-decoration: none;
       }
     </style>
-    <script type="module" crossorigin src="./assets/game-DTojjl_N.js"></script>
+    <script type="module" crossorigin src="./assets/game-CcXnRbMz.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/augmentsData-CMzy9t9e.js">
-    <link rel="modulepreload" crossorigin href="./assets/CreatureRenderer-BITV_YsS.js">
+    <link rel="modulepreload" crossorigin href="./assets/CreatureRenderer-B_q2dYm-.js">
     <link rel="modulepreload" crossorigin href="./assets/speciesPassivesData-CiKMRo2h.js">
-    <link rel="modulepreload" crossorigin href="./assets/AdminPanel-Dgoez0Y9.js">
-    <link rel="stylesheet" crossorigin href="./assets/game-DKXMQ8Yf.css">
+    <link rel="modulepreload" crossorigin href="./assets/AdminPanel-BKbyLZOP.js">
+    <link rel="stylesheet" crossorigin href="./assets/game-DqAzd4y2.css">
     <link rel="stylesheet" crossorigin href="./assets/modals-Zg05rrBZ.css">
   </head>
   <body>
@@ -71,17 +71,58 @@
 
     <!-- HUD TRONG GAME -->
     <div id="ui-layer">
-      <!-- NÚT ICON CHAT TRÊN CHÍNH GIỮA MÀN HÌNH + BADGE ĐẾM TIN MỚI -->
+      <!-- CỤM NÚT CHAT, MIC & TEAM TRÊN CHÍNH GIỮA MÀN HÌNH -->
       <div class="top-center-chat-anchor">
-        <button
-          type="button"
-          id="btn-toggle-chat"
-          class="chat-floating-btn"
-          title="Mở/Đóng Chat Phòng [Enter]"
-        >
-          <span>💬</span>
-          <span id="chat-unread-badge" class="chat-unread-badge hidden">0</span>
-        </button>
+        <div class="top-center-comm-bar">
+          <button
+            type="button"
+            id="btn-toggle-chat"
+            class="chat-floating-btn"
+            title="Mở/Đóng Chat Phòng [Enter]"
+          >
+            <span>💬</span>
+            <span id="chat-unread-badge" class="chat-unread-badge hidden"
+              >0</span
+            >
+          </button>
+
+          <div class="voice-mic-cluster" id="voice-mic-cluster">
+            <button
+              type="button"
+              id="btn-toggle-mic"
+              class="chat-floating-btn voice-mic-btn mic-off"
+              title="Bật/Tắt Micro [M]"
+            >
+              <span id="mic-icon">🎙️</span>
+              <span id="mic-channel-label" class="mic-channel-label">Tắt</span>
+              <span
+                id="mic-speaking-dot"
+                class="mic-speaking-dot hidden"
+              ></span>
+            </button>
+            <button
+              type="button"
+              id="btn-cycle-mic-channel"
+              class="chat-floating-btn voice-channel-btn"
+              title="Đổi Kênh Thoại (Đội / Tất Cả / Tắt)"
+            >
+              <span id="mic-channel-icon">🌐</span>
+            </button>
+          </div>
+
+          <button
+            type="button"
+            id="btn-toggle-team"
+            class="chat-floating-btn team-floating-btn"
+            title="Quản Lý Tổ Đội [T]"
+          >
+            <span>🛡️</span>
+            <span id="team-btn-label" class="team-btn-label">Đội</span>
+            <span id="team-invite-badge" class="chat-unread-badge hidden"
+              >0</span
+            >
+          </button>
+        </div>
 
         <!-- KHUNG CHAT MẶC ĐỊNH ẨN (COLLAPSED) -->
         <div class="panel-glass chat-box collapsed" id="chat-box">
@@ -387,6 +428,117 @@
               <span class="boost-lbl">BƠI NHANH</span>
             </button>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL QUẢN LÝ TỔ ĐỘI & VOICE CHAT -->
+    <div id="team-modal" class="modal-screen hidden">
+      <div class="lobby-container team-modal-card">
+        <div class="team-modal-header">
+          <h2>🛡️ TỔ ĐỘI &amp; VOICE CHAT</h2>
+          <button
+            type="button"
+            id="btn-close-team-modal"
+            class="btn-hud"
+            style="border-color: #ff4d6d; color: #ff758f"
+          >
+            ✖ Đóng
+          </button>
+        </div>
+
+        <!-- LỜI MỜI ĐANG CHỜ -->
+        <div id="team-invites-section" class="team-section hidden">
+          <div class="team-section-title">📩 Lời Mời Vào Đội</div>
+          <div id="team-invites-list" class="team-list"></div>
+        </div>
+
+        <!-- CHƯA CÓ ĐỘI: TẠO HOẶC NHẬP MÃ -->
+        <div id="team-no-team-view" class="team-section">
+          <div class="team-action-group">
+            <div class="team-section-title">✨ Tạo Tổ Đội Mới</div>
+            <div class="team-input-row">
+              <input
+                type="text"
+                id="team-name-input"
+                class="lobby-input"
+                placeholder="Tên đội (tùy chọn)..."
+                maxlength="24"
+                autocomplete="off"
+              />
+              <button
+                type="button"
+                id="btn-create-team"
+                class="btn-play team-btn-compact"
+              >
+                Tạo Đội
+              </button>
+            </div>
+          </div>
+
+          <div class="team-action-group">
+            <div class="team-section-title">🔑 Vào Đội Bằng Mã 4 Ký Tự</div>
+            <div class="team-input-row">
+              <input
+                type="text"
+                id="team-code-input"
+                class="lobby-input team-code-input"
+                placeholder="VD: AB12"
+                maxlength="8"
+                autocomplete="off"
+              />
+              <button
+                type="button"
+                id="btn-join-team"
+                class="btn-hud team-btn-join"
+              >
+                Tham Gia
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ĐÃ CÓ ĐỘI: THÔNG TIN & THÀNH VIÊN -->
+        <div id="team-active-view" class="team-section hidden">
+          <div class="team-info-banner">
+            <div>
+              <div id="team-current-name" class="team-current-name">Đội</div>
+              <div class="team-code-row">
+                Mã đội:
+                <strong id="team-current-code" class="team-code-badge"
+                  >----</strong
+                >
+                <button
+                  type="button"
+                  id="btn-copy-team-code"
+                  class="btn-hud team-mini-btn"
+                >
+                  📋 Sao chép
+                </button>
+              </div>
+            </div>
+            <div class="team-header-actions">
+              <span id="team-member-count" class="team-count-pill">1/4</span>
+              <button
+                type="button"
+                id="btn-leave-team"
+                class="btn-hud team-mini-btn team-danger-btn"
+              >
+                🚪 Rời Đội
+              </button>
+            </div>
+          </div>
+
+          <div class="team-section-title">👥 Thành Viên Trong Đội</div>
+          <div id="team-members-list" class="team-list"></div>
+        </div>
+
+        <!-- DANH SÁCH NGƯỜI CHƠI TRONG PHÒNG ĐỂ MỜI -->
+        <div id="team-room-players-section" class="team-section">
+          <div class="team-section-title">
+            🌊 Người Chơi Trong Phòng (Mời vào đội)
+          </div>
+          <div id="team-room-players-list" class="team-list"></div>
         </div>
       </div>
     </div>
@@ -829,6 +981,6 @@
           passive: true,
         });
       })();
-    </script>
+    </script>
   </body>
 </html>
