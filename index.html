@@ -14,24 +14,29 @@
     />
     <meta name="theme-color" content="#01080e" />
     <title>OCEAN ODYSSEY: EVOLUTION - Sảnh Chính</title>
-    <script type="module" crossorigin src="./assets/main-BxDULB7P.js"></script>
-    <link rel="modulepreload" crossorigin href="./assets/augmentsData-8y6lFnMX.js">
-    <link rel="modulepreload" crossorigin href="./assets/CreatureRenderer-DEWLrJZW.js">
-    <link rel="stylesheet" crossorigin href="./assets/main-CW4CsfFG.css">
-    <link rel="stylesheet" crossorigin href="./assets/modals-Cg6J1g7s.css">
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23023e8a'/%3E%3Ctext x='32' y='43' font-size='36' text-anchor='middle'%3E%F0%9F%8C%8A%3C/text%3E%3C/svg%3E"
+    />
+    <script type="module" crossorigin src="./assets/main-CvVXO713.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/augmentsData-DJEHlkm9.js">
+    <link rel="modulepreload" crossorigin href="./assets/upgradesData-CJlxROOJ.js">
+    <link rel="stylesheet" crossorigin href="./assets/main-Cs0xJAjj.css">
+    <link rel="stylesheet" crossorigin href="./assets/modals-BBqL7AHe.css">
   </head>
   <body>
     <canvas id="lobby-canvas"></canvas>
     <div id="lobby-toast-wrap"></div>
 
-    <!-- SẢNH CHÍNH LOBBY HUB -->
+    <!-- SẢNH CHÍNH LOBBY HUB (GỌN 1 MÀN HÌNH) -->
     <div id="lobby-screen" class="lobby-hub-shell">
       <div class="lobby-hub-card">
         <div class="lobby-header">
           <h1>🌊 OCEAN ODYSSEY: EVOLUTION</h1>
           <p>
-            Sảnh Chính Đại Dương • 13 Chuẩn Tiến Hóa • Nhân Vật OMEGA NYX-0 •
-            Đấu Trường Online
+            Thế Giới Bán Mở 4 Khu Vực • 13 Chuẩn Tiến Hóa • OMEGA NYX-0 • Đấu
+            Trường Online
           </p>
         </div>
 
@@ -52,6 +57,22 @@
           >
 
           <div class="hub-nav-actions">
+            <button
+              type="button"
+              class="btn-hub-link"
+              id="btn-open-meta-shop"
+              title="Mở Cửa Hàng Đột Biến Vĩnh Viễn"
+            >
+              🛒 Cửa Hàng
+            </button>
+            <button
+              type="button"
+              class="btn-hub-link"
+              id="btn-open-global-lb"
+              title="Xem Bảng Vàng Toàn Server"
+            >
+              👑 Bảng Vàng
+            </button>
             <a href="./encyclopedia.html" class="btn-hub-link">
               📖 Bách Khoa
             </a>
@@ -60,13 +81,13 @@
               id="btn-admin-page"
               class="btn-hub-link admin-link hidden"
             >
-              👑 Admin
+              🛡️ Admin
             </a>
             <button
               type="button"
               class="btn-hud"
               id="btn-lobby-ambient"
-              title="Bật/Tắt Âm Thanh Nền Đại Dương"
+              title="Bật/Tắt Nhạc Nền &amp; Âm Thanh Đại Dương"
             >
               🌊 Nền: Bật
             </button>
@@ -87,8 +108,8 @@
         <!-- 1. CHỌN NHÂN VẬT VỚI NÚT CHUYỂN < VÀ > -->
         <div>
           <div class="section-label">
-            1. Chọn Thủy Quái Xuất Trận (Dùng &lt; và &gt; hoặc vuốt ngang để
-            chuyển loài)
+            1. Chọn Thủy Quái Xuất Trận (Dùng &lt; &gt; hoặc vuốt ngang để đổi
+            loài)
           </div>
 
           <div class="species-carousel-wrap">
@@ -147,101 +168,86 @@
           <div class="carousel-dots" id="species-dots"></div>
         </div>
 
-        <!-- 2. THÔNG TIN PHÒNG & CHẾ ĐỘ -->
-        <div class="input-row">
-          <input
-            type="text"
-            id="player-name-input"
-            class="lobby-input"
-            placeholder="Tên sinh vật của bạn..."
-            maxlength="16"
-            value="Thủy Quái Chúa"
-          />
-          <input
-            type="text"
-            id="room-id-input"
-            class="lobby-input"
-            style="border-color: #fee440; color: #fee440"
-            placeholder="Mã phòng (VD: VIP1)..."
-            maxlength="12"
-            value="PUBLIC"
-          />
-          <select
-            id="gamemode-select"
-            class="lobby-input"
-            style="border-color: #00bbf9; color: #00bbf9; cursor: pointer"
-          >
-            <option value="classic">🌊 Chế Độ: Sinh Tồn Tự Do</option>
-            <option value="royale">☠️ Chế Độ: Sinh Tử Vòng Bo</option>
-            <option value="domination">⛩️ Chế Độ: Chiếm Đền Thờ</option>
-          </select>
+        <!-- 2. TÊN NHÂN VẬT & MÃ PHÒNG -->
+        <div>
+          <div class="input-row">
+            <input
+              type="text"
+              id="player-name-input"
+              class="lobby-input"
+              placeholder="Tên sinh vật của bạn..."
+              maxlength="16"
+              value="Thủy Quái Chúa"
+            />
+            <input
+              type="text"
+              id="room-id-input"
+              class="lobby-input"
+              style="border-color: #fee440; color: #fee440"
+              placeholder="Mã phòng (VD: VIP1)..."
+              maxlength="12"
+              value="PUBLIC"
+            />
+          </div>
         </div>
 
-        <!-- 3. CHỌN BẢN ĐỒ / VÙNG HỒI SINH -->
+        <!-- 3. BẢN ĐỒ THẾ GIỚI BÁN MỞ 4 KHU VỰC (4 MAP TRONG 1 BẢN ĐỒ) -->
         <div>
           <div class="section-label">
-            2. Chọn Bản Đồ / Vùng Hồi Sinh (Spawn Zone)
+            2. Bản Đồ Thế Giới 4 Khu Vực (Mở Cổng Ranh Giới Theo Cấp &amp; Ngọc)
           </div>
           <div class="map-grid" id="map-selector">
-            <div class="card-option" data-map="coral">
-              <div class="card-icon">🪸</div>
-              <div class="card-title">Rạn San Hô Ánh Dương</div>
-              <div class="card-skill" style="color: #00f5d4">Bản Đồ San Hô</div>
-              <div class="card-desc">
-                Bụi tảo tàng hình, tàu đắm, sao biển &amp; hải lưu ấm.
-              </div>
-            </div>
-            <div class="card-option" data-map="abyss">
-              <div class="card-icon">🔮</div>
-              <div class="card-title">Vực Thẳm Phát Quang</div>
-              <div class="card-skill" style="color: #00f5d4">
-                Bản Đồ Vực Thẳm
-              </div>
-              <div class="card-desc">
-                Núi lửa phun trào, sứa phát sáng &amp; nhiều Ngọc Trai.
-              </div>
-            </div>
-            <div class="card-option" data-map="swamp">
-              <div class="card-icon">🌿</div>
-              <div class="card-title">Rừng Ngập Mặn Huyền Bí</div>
-              <div class="card-skill" style="color: #00f5d4">
-                Bản Đồ Đầm Lầy
-              </div>
-              <div class="card-desc">
-                Rễ đước ẩn nấp, cột đá cổ đại và hệ sinh thái giàu XP.
-              </div>
-            </div>
             <div
               class="card-option active"
               data-map="hybrid"
-              style="border-color: rgba(254, 228, 64, 0.55)"
+              data-zone="1"
+              style="border-color: rgba(0, 245, 212, 0.7)"
             >
-              <div class="card-icon">🌐</div>
-              <div class="card-title" style="color: #fee440">
-                Đại Dương Hỗn Mang
+              <div class="card-icon">🪸</div>
+              <div class="card-title" style="color: #00f5d4">
+                Map 1: San Hô Khởi Nguyên
               </div>
-              <div class="card-skill">Thế Giới Chung (Mặc Định)</div>
+              <div class="card-skill">Lv.1 – 25 • Xuất Phát (Mở Sẵn)</div>
               <div class="card-desc">
-                Bản đồ siêu rộng kết hợp cả 3 vùng sinh thái &amp; Đền Thờ!
+                Vùng tân thủ gốc: Đền An Toàn, Cụ Rùa, Cá Voi Xanh &amp; Cá Heo.
               </div>
             </div>
-          </div>
-        </div>
 
-        <!-- 4. CỬA HÀNG & BẢNG XẾP HẠNG TOÀN SERVER -->
-        <div class="lobby-bottom-split">
-          <div>
-            <div class="section-label">3. Cửa Hàng Đột Biến Vĩnh Viễn</div>
-            <div class="shop-grid" id="meta-shop-grid"></div>
-          </div>
-          <div>
-            <div class="section-label">
-              👑 Bảng Vàng Đại Dương (Toàn Server)
-            </div>
-            <div class="global-lb-box" id="global-leaderboard-list">
-              <div style="font-size: 11px; color: #90e0ef">
-                Đang tải dữ liệu...
+            <div class="card-option" data-map="volcano" data-zone="2">
+              <div class="card-icon">🌋</div>
+              <div class="card-title" style="color: #ff7b54">
+                Map 2: Núi Lửa Dung Nham
               </div>
+              <div class="card-skill">Lv.25 – 50 • Cổng: Lv.25 + 200 💎</div>
+              <div class="card-desc">
+                Mạch phun dung nham, đá bazan nóng bỏng &amp; quái Hỏa Diệm.
+              </div>
+              <div class="zone-lock-badge hidden"></div>
+            </div>
+
+            <div class="card-option" data-map="ice" data-zone="3">
+              <div class="card-icon">❄️</div>
+              <div class="card-title" style="color: #72efdd">
+                Map 3: Hang Băng Vĩnh Cửu
+              </div>
+              <div class="card-skill">Lv.50 – 75 • Cổng: Lv.50 + 500 💎</div>
+              <div class="card-desc">
+                Động tinh thể băng phát quang, dòng nước lạnh &amp; quái Băng
+                Giá.
+              </div>
+              <div class="zone-lock-badge hidden"></div>
+            </div>
+
+            <div class="card-option" data-map="thunder" data-zone="4">
+              <div class="card-icon">⚡</div>
+              <div class="card-title" style="color: #c77dff">
+                Map 4: Địa Ngục Điện Ngục
+              </div>
+              <div class="card-skill">Lv.75 – 100 • Cổng: Lv.75 + 1000 💎</div>
+              <div class="card-desc">
+                Trụ sét cao áp, sấm chớp vực sâu &amp; quái Lôi Ngục tối thượng.
+              </div>
+              <div class="zone-lock-badge hidden"></div>
             </div>
           </div>
         </div>
@@ -254,6 +260,56 @@
           <a href="./encyclopedia.html" class="btn-encyclopedia-cta">
             📖 BÁCH KHOA THỦY QUÁI &amp; OMEGA
           </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL CỬA HÀNG ĐỘT BIẾN VĨNH VIỄN -->
+    <div id="meta-shop-modal" class="modal-screen hidden">
+      <div class="lobby-container" style="width: 680px">
+        <div class="settings-modal-header">
+          <div>
+            <h2>🛒 CỬA HÀNG ĐỘT BIẾN VĨNH VIỄN</h2>
+            <div class="device-detect-pill">
+              💎 Dùng Ngọc nâng cấp chỉ số vĩnh viễn cho mọi trận đấu
+            </div>
+          </div>
+          <button
+            type="button"
+            id="btn-close-meta-shop"
+            class="btn-hud"
+            style="border-color: #ff4d6d; color: #ff758f"
+          >
+            ✖ Đóng
+          </button>
+        </div>
+
+        <div class="shop-grid" id="meta-shop-grid"></div>
+      </div>
+    </div>
+
+    <!-- MODAL BẢNG VÀNG TOÀN SERVER -->
+    <div id="global-lb-modal" class="modal-screen hidden">
+      <div class="lobby-container" style="width: 480px">
+        <div class="settings-modal-header">
+          <div>
+            <h2>👑 BẢNG VÀNG ĐẠI DƯƠNG</h2>
+            <div class="device-detect-pill">
+              🏆 Top Thủy Quái có điểm kỷ lục cao nhất toàn Server
+            </div>
+          </div>
+          <button
+            type="button"
+            id="btn-close-global-lb"
+            class="btn-hud"
+            style="border-color: #ff4d6d; color: #ff758f"
+          >
+            ✖ Đóng
+          </button>
+        </div>
+
+        <div class="global-lb-box" id="global-leaderboard-list">
+          <div style="font-size: 11px; color: #90e0ef">Đang tải dữ liệu...</div>
         </div>
       </div>
     </div>
@@ -307,14 +363,14 @@
       </div>
     </div>
 
-    <!-- MODAL CÀI ĐẶT (GỌN & ĐỒNG BỘ VỚI TRONG TRẬN) -->
+    <!-- MODAL CÀI ĐẶT -->
     <div id="settings-screen" class="modal-screen hidden">
       <div class="lobby-container settings-modal-card" style="width: 560px">
         <div class="settings-modal-header">
           <div>
             <h2>⚙️ CÀI ĐẶT HỆ THỐNG</h2>
             <div class="device-detect-pill">
-              🎛️ Tùy chỉnh Âm Thanh, Đồ Họa Tự Động &amp; Camera
+              🎛️ Tùy chỉnh Âm Thanh, Nhạc Nền, Đồ Họa &amp; Camera
             </div>
           </div>
           <button
@@ -329,7 +385,25 @@
 
         <div class="settings-body">
           <div class="settings-section-card">
-            <div class="settings-sec-title">🔊 Âm Thanh</div>
+            <div class="settings-sec-title">🔊 Âm Thanh &amp; Nhạc Nền</div>
+            <div class="setting-row">
+              <div class="setting-info">
+                <span class="setting-name"
+                  >Âm lượng nhạc nền (BGM):
+                  <b id="set-bgm-val" style="color: #fee440">55%</b></span
+                >
+              </div>
+              <input
+                type="range"
+                id="set-bgm-volume"
+                class="setting-slider"
+                min="0"
+                max="1"
+                step="0.05"
+                value="0.55"
+              />
+            </div>
+
             <div class="setting-row">
               <div class="setting-info">
                 <span class="setting-name"

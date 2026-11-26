@@ -15,8 +15,12 @@
     />
     <meta name="apple-mobile-web-app-title" content="Ocean Odyssey" />
     <meta name="theme-color" content="#01080e" />
-    <title>OCEAN ODYSSEY: Đấu Trường Đại Dương</title>
-    <link rel="stylesheet" href="css/radial-menu.css" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌊</text></svg>"
+    />
+    <title>OCEAN ODYSSEY: Đấu Trường Đại Dương</title>
     <style>
       #game-canvas {
         display: block;
@@ -43,14 +47,76 @@
         gap: 6px;
         text-decoration: none;
       }
+
+      .quick-build-close-btn {
+        pointer-events: auto;
+        background: rgba(255, 77, 109, 0.2);
+        border: 1px solid rgba(255, 77, 109, 0.55);
+        color: #ff758f;
+        border-radius: 7px;
+        width: 24px;
+        height: 24px;
+        font-size: 12px;
+        font-weight: 900;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .quick-build-close-btn:hover {
+        background: rgba(255, 77, 109, 0.38);
+        color: #ffffff;
+      }
+
+      .zone-gate-pill {
+        pointer-events: auto;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        padding: 3px 9px;
+        border-radius: 999px;
+        background: rgba(4, 22, 36, 0.84);
+        border: 1px solid rgba(254, 228, 64, 0.45);
+        color: #fee440;
+        font-size: 10.5px;
+        font-weight: 800;
+        width: fit-content;
+        max-width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .minimap-wrap {
+        cursor: pointer;
+        pointer-events: auto;
+      }
+
+      .minimap-expand-badge {
+        position: absolute;
+        right: 4px;
+        bottom: 4px;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: rgba(4, 22, 36, 0.9);
+        border: 1px solid rgba(0, 245, 212, 0.6);
+        color: #00f5d4;
+        font-size: 11px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        pointer-events: none;
+      }
     </style>
-    <script type="module" crossorigin src="./assets/game-a3sL59Y8.js"></script>
-    <link rel="modulepreload" crossorigin href="./assets/augmentsData-8y6lFnMX.js">
-    <link rel="modulepreload" crossorigin href="./assets/CreatureRenderer-DEWLrJZW.js">
+    <script type="module" crossorigin src="./assets/game-TYJ6kQSO.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/augmentsData-DJEHlkm9.js">
+    <link rel="modulepreload" crossorigin href="./assets/upgradesData-CJlxROOJ.js">
     <link rel="modulepreload" crossorigin href="./assets/speciesPassivesData-CiKMRo2h.js">
-    <link rel="modulepreload" crossorigin href="./assets/AdminPanel-x9hNbfFk.js">
-    <link rel="stylesheet" crossorigin href="./assets/game-CfVlyWr1.css">
-    <link rel="stylesheet" crossorigin href="./assets/modals-Cg6J1g7s.css">
+    <link rel="modulepreload" crossorigin href="./assets/AdminPanel-Oef_Ccfa.js">
+    <link rel="stylesheet" crossorigin href="./assets/game-CRhpAZNB.css">
+    <link rel="stylesheet" crossorigin href="./assets/modals-BBqL7AHe.css">
   </head>
   <body>
     <canvas id="game-canvas"></canvas>
@@ -128,6 +194,7 @@
             type="button"
             id="btn-emote-wheel"
             class="hud-wheel-trigger-btn"
+            data-wheel-trigger="emote"
             title="Mở Bánh Xe Cảm Xúc [G]"
           >
             <span>😊</span>
@@ -158,11 +225,21 @@
         </div>
       </div>
 
-      <!-- BẢNG XEM NHANH CHỈ SỐ & BUILD TRONG SUỐT (GIỮ TAB PC / CHẠM LÕI MOBILE) -->
+      <!-- BẢNG XEM NHANH CHỈ SỐ & BUILD TRONG SUỐT (CÓ NÚT X ĐỂ TẮT) -->
       <div id="quick-build-overlay" class="quick-build-overlay hidden">
         <div class="quick-build-header">
           <span>📊 CHỈ SỐ &amp; BUILD HIỆN TẠI</span>
-          <span class="quick-build-hint">[Giữ Tab / Chạm Lõi]</span>
+          <div style="display: flex; align-items: center; gap: 6px">
+            <span class="quick-build-hint">[Tab]</span>
+            <button
+              type="button"
+              id="btn-close-quick-build"
+              class="quick-build-close-btn"
+              title="Đóng bảng chỉ số"
+            >
+              ✖
+            </button>
+          </div>
         </div>
         <div id="quick-build-content" class="quick-build-content"></div>
       </div>
@@ -203,7 +280,7 @@
                 class="stat-val"
                 id="hud-zone"
                 style="font-size: 12px; color: #fee440"
-                >Rạn San Hô</span
+                >Map 1: San Hô Khởi Nguyên</span
               >
               <span
                 id="hud-room-tag"
@@ -220,6 +297,11 @@
           >
             <div id="hud-super-augments" class="super-slots-row"></div>
             <div id="hud-species-passives" class="passives-row"></div>
+          </div>
+
+          <!-- THANH CHỈ BÁO CỔNG KHU VỰC TIẾP THEO (CẬP NHẬT ĐỘNG TỪ MAIN.JS) -->
+          <div id="hud-zone-gate-hint" class="zone-gate-pill">
+            🔒 Cổng Núi Lửa (Map 2): Cần Lv.25 &amp; 200 💎
           </div>
         </div>
 
@@ -300,7 +382,7 @@
             <div id="leaderboard-list"></div>
           </div>
 
-          <!-- Khung Nhiệm Vụ Tiến Hóa (Mặc định ẩn để không che màn hình) -->
+          <!-- Khung Nhiệm Vụ Tiến Hóa -->
           <div id="quest-hud" class="quest-hud-collapsed">
             <div
               class="panel-glass quest-panel collapsed-panel"
@@ -330,8 +412,13 @@
       <div class="hud-bottom">
         <div class="hud-bottom-left">
           <div class="hud-radar-emote-row">
-            <div class="minimap-wrap" title="Radar Đại Dương">
+            <div
+              class="minimap-wrap"
+              id="minimap-trigger"
+              title="Radar Đại Dương (Chạm để xem Bản Đồ 4 Khu Vực)"
+            >
               <canvas id="minimapCanvas" width="165" height="165"></canvas>
+              <span class="minimap-expand-badge">🗺️</span>
             </div>
           </div>
 
@@ -350,7 +437,7 @@
           </div>
         </div>
 
-        <!-- Thanh Thể Lực PC + Túi Vật Phẩm Chiến Thuật 3 Ô + Nút Bánh Xe Chiến Thuật -->
+        <!-- Thanh Thể Lực PC + Túi Vật Phẩm Chiến Thuật 3 Ô + Nút Bánh Xe 6 Skill Boss -->
         <div class="controls-center">
           <div class="bag-and-wheel-row">
             <div
@@ -376,9 +463,10 @@
               type="button"
               id="btn-radial-menu"
               class="hud-wheel-trigger-btn tactical-btn"
-              title="Mở Bánh Xe Vật Phẩm &amp; Skill Boss [B]"
+              data-wheel-trigger="radial"
+              title="Mở Bánh Xe 6 Skill Boss Sử Thi [B]"
             >
-              <span>🎡</span>
+              <span>💠</span>
               <span class="hud-wheel-key">B</span>
             </button>
           </div>
@@ -388,7 +476,8 @@
             style="text-align: center; padding: 8px 14px"
           >
             <div class="stat-label" id="stamina-label">
-              Giữ Chuột / Space: Bơi Nhanh • Giữ Tab: Xem Build • G/B: Bánh Xe
+              Giữ Chuột / Space: Bơi Nhanh • Tab: Chỉ Số • G: Cảm Xúc • B: Skill
+              Boss
             </div>
             <div class="bar-wrap" style="width: 150px">
               <div id="stamina-bar"></div>
@@ -443,6 +532,42 @@
             </button>
           </div>
         </div>
+      </div>
+    </div>
+
+    <!-- MODAL BẢN ĐỒ THẾ GIỚI 4 KHU VỰC TOÀN CẢNH -->
+    <div id="worldmap-modal" class="modal-screen hidden">
+      <div class="lobby-container" style="width: 460px; text-align: center">
+        <div class="settings-modal-header">
+          <div>
+            <h2>🗺️ BẢN ĐỒ THẾ GIỚI 4 KHU VỰC</h2>
+            <div class="device-detect-pill">
+              12.800 × 12.800 • Ranh giới &amp; Cổng Mở Khóa Theo Cấp
+            </div>
+          </div>
+          <button
+            type="button"
+            id="btn-close-worldmap"
+            class="btn-hud"
+            style="border-color: #ff4d6d; color: #ff758f"
+          >
+            ✖ Đóng
+          </button>
+        </div>
+
+        <canvas
+          id="worldmap-full-canvas"
+          width="360"
+          height="360"
+          style="
+            margin: 0 auto;
+            border-radius: 14px;
+            border: 2px solid rgba(0, 245, 212, 0.55);
+            background: #020c16;
+            max-width: 100%;
+            height: auto;
+          "
+        ></canvas>
       </div>
     </div>
 
@@ -614,7 +739,7 @@
       </div>
     </div>
 
-    <!-- MODAL CÀI ĐẶT PC & MOBILE (GỌN & CHUYÊN NGHIỆP) -->
+    <!-- MODAL CÀI ĐẶT PC & MOBILE -->
     <div id="settings-screen" class="modal-screen hidden">
       <div class="lobby-container settings-modal-card" style="width: 590px">
         <div class="settings-modal-header">
@@ -650,10 +775,28 @@
           </button>
         </div>
 
-        <!-- TAB 1: ĐỒ HỌA, TỰ ĐỘNG CẤU HÌNH & ÂM THANH -->
+        <!-- TAB 1: ĐỒ HỌA, TỰ ĐỘNG CẤU HÌNH, NHẠC NỀN & ÂM THANH -->
         <div id="settings-tab-general" class="settings-body">
           <div class="settings-section-card">
-            <div class="settings-sec-title">🔊 Âm Thanh</div>
+            <div class="settings-sec-title">🔊 Âm Thanh &amp; Nhạc Nền</div>
+            <div class="setting-row">
+              <div class="setting-info">
+                <span class="setting-name"
+                  >Âm lượng nhạc nền (BGM):
+                  <b id="set-bgm-val" style="color: #fee440">55%</b></span
+                >
+              </div>
+              <input
+                type="range"
+                id="set-bgm-volume"
+                class="setting-slider"
+                min="0"
+                max="1"
+                step="0.05"
+                value="0.55"
+              />
+            </div>
+
             <div class="setting-row">
               <div class="setting-info">
                 <span class="setting-name"
@@ -676,7 +819,7 @@
               <div class="setting-info">
                 <span class="setting-name">Tắt toàn bộ âm thanh</span>
                 <span class="setting-sub"
-                  >Ngắt cả âm thanh nền đại dương và hiệu ứng chiến đấu</span
+                  >Ngắt cả nhạc nền đại dương và hiệu ứng chiến đấu</span
                 >
               </div>
               <label class="setting-switch">
@@ -848,8 +991,8 @@
                 <code>R</code> | <b>Soi Build:</b> Giữ <code>Tab</code>
               </div>
               <div>
-                <b>Bánh Xe Cảm Xúc:</b> <code>G</code> |
-                <b>Bánh Xe Chiến Thuật:</b> <code>B</code> | <b>Mic:</b>
+                <b>Mở Cổng Map:</b> <code>F</code> | <b>Cảm Xúc:</b>
+                <code>G</code> | <b>Skill Boss:</b> <code>B</code> | <b>Mic:</b>
                 <code>M</code> / <code>Y</code>
               </div>
               <div>
@@ -928,7 +1071,7 @@
         <div id="settings-tab-keybinds" class="settings-body hidden">
           <div style="font-size: 12px; color: #90e0ef">
             Gán phím cho kỹ năng Boss Sử Thi (không được trùng phím skill gốc
-            <b>E / Q / R / Tab</b> hoặc phím hệ thống).
+            <b>E / Q / R / F / Tab / G / B</b> hoặc phím hệ thống).
           </div>
           <div class="keybind-error" id="keybind-error-msg"></div>
           <div id="keybind-list" class="keybind-list"></div>
@@ -1000,12 +1143,16 @@
       </div>
     </div>
 
-    <!-- MODAL GAME OVER -->
+    <!-- MODAL KẾT THÚC TRẬN (GAME OVER) -->
     <div id="gameover-screen" class="modal-screen hidden">
-      <div class="lobby-container" style="width: 500px; text-align: center">
+      <div
+        class="lobby-container gameover-card"
+        style="width: 520px; text-align: center"
+      >
         <h1
+          id="gameover-title-heading"
           style="
-            font-size: 30px;
+            font-size: 28px;
             background: linear-gradient(90deg, #ff4d6d, #ff758f);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -1015,20 +1162,21 @@
         </h1>
         <div
           id="gameover-title-badge"
-          style="font-size: 15px; font-weight: 800; color: #fee440"
+          style="font-size: 14px; font-weight: 800; color: #fee440"
         ></div>
         <p
           id="gameover-stats"
           style="
             color: #caf0f8;
-            font-size: 14px;
-            line-height: 1.7;
+            font-size: 13px;
+            line-height: 1.55;
             background: rgba(0, 0, 0, 0.35);
-            padding: 12px;
+            padding: 10px;
             border-radius: 12px;
           "
         ></p>
         <div
+          class="gameover-actions-bar"
           style="
             display: flex;
             gap: 12px;
@@ -1067,7 +1215,6 @@
           map: params.get("map") || "hybrid",
           fish: params.get("fish") || "fish",
           room: (params.get("room") || "PUBLIC").toUpperCase(),
-          mode: params.get("mode") || "classic",
           name: params.get("name") || "Thủy Quái Chúa",
         };
 
@@ -1090,6 +1237,15 @@
         window.addEventListener("resize", resetScrollViewport, {
           passive: true,
         });
+
+        document
+          .getElementById("btn-close-quick-build")
+          ?.addEventListener("click", (e) => {
+            e.stopPropagation();
+            document
+              .getElementById("quick-build-overlay")
+              ?.classList.add("hidden");
+          });
       })();
     </script>
   </body>
